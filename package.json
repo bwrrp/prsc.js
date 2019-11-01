@@ -11,12 +11,12 @@
 	"main": "dist/prsc.js",
 	"module": "dist/prsc.mjs",
 	"scripts": {
-		"build:api": "api-extractor run; copyfiles --flat temp/* api",
-		"build:docs": "api-documenter markdown -i api -o docs",
-		"build:clean": "rimraf dist && rimraf lib",
-		"build:dirs": "mkdirp lib",
+		"build:clean": "rimraf dist && rimraf lib && rimraf temp",
 		"build:bundle": "tsc -P tsconfig.build.json && rollup -c",
-		"build": "npm-run-all build:clean build:dirs build:bundle build:api build:docs",
+		"build:api": "api-extractor run",
+		"build:api-copy": "copyfiles --flat temp/* api",
+		"build:docs": "api-documenter markdown -i api -o docs",
+		"build": "npm-run-all build:clean build:bundle build:api build:api-copy build:docs",
 		"prepare": "npm run build",
 		"test": "jest --coverage --verbose"
 	},
