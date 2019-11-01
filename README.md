@@ -27,11 +27,11 @@ Node.js, and an ES6 module (`dist/prsc.mjs`). TypeScript typings are included
 
 ## Usage
 
-This library exports a number of functions that make it easy to build parsers
-for input represented as a string. Start from primitive parsers such as
-`token` or your own functions matching the `Parser` type, transform results
-using `map` and `filter` and combine them using the other functions such as
-`then` and `star`.
+This library exports [a number of functions](./docs/prsc.md) that make it
+easy to build parsers for input represented as a string. Start from primitive
+parsers such as `token` or your own functions matching the `Parser` type,
+transform results using `map` and `filter` and combine them using the other
+functions such as `then` and `star`.
 
 ### Example
 
