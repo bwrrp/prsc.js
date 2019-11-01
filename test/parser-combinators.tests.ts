@@ -9,7 +9,11 @@ import {
 	token,
 	not,
 	recognize,
-	delimited
+	delimited,
+	cut,
+	preceded,
+	peek,
+	complete
 } from '../src/parser-combinators';
 
 describe('parser combinators', () => {
@@ -85,6 +89,34 @@ describe('parser combinators', () => {
 			expect(parser('a', 0).offset).toBe(0);
 			expect((parser('a', 0) as any).expected).toEqual([]);
 		});
+
+		it('combines expected values from its child parsers', () => {
+			const parser = or([token('a'), token('b'), token('c')]);
+			const res = parser('d', 0);
+			expect(res.success).toBe(false);
+			expect(res.offset).toBe(0);
+			expect((res as any).expected).toEqual(['a', 'b', 'c']);
+		});
+
+		it('returns the error from the child parsers that got the furthest', () => {
+			const ab = preceded(token('a'), token('b'));
+			const abc = preceded(ab, token('c'));
+			const ac = preceded(token('a'), token('c'));
+			const parser = or([abc, ac]);
+			const res = parser('abd', 0);
+			expect(res.success).toBe(false);
+			expect(res.offset).toBe(2);
+			expect((res as any).expected).toEqual(['c']);
+		});
+
+		it('stops trying child parsers if one returns a fatal error', () => {
+			const parser = or([cut(token('a')), token('b')]);
+			const res = parser('b', 0);
+			expect(res.success).toBe(false);
+			expect(res.offset).toBe(0);
+			expect((res as any).fatal).toBe(true);
+			expect((res as any).expected).toEqual(['a']);
+		});
 	});
 
 	describe('optional', () => {
@@ -111,6 +143,14 @@ describe('parser combinators', () => {
 			expect(parser('aaa', 0).success).toBe(true);
 			expect(parser('aaa', 0).offset).toBe(3);
 			expect((parser('aaa', 0) as any).value).toEqual(['a', 'a', 'a']);
+		});
+
+		it('returns failure for fatal errors', () => {
+			const parser = star(cut(token('a')));
+			const res = parser('aaab', 0);
+			expect(res.success).toBe(false);
+			expect(res.offset).toBe(3);
+			expect((res as any).expected).toEqual(['a']);
 		});
 	});
 
@@ -162,6 +202,22 @@ describe('parser combinators', () => {
 		});
 	});
 
+	describe('delimited', () => {
+		it('accepts if all three parsers match', () => {
+			const parser = delimited(token('('), token('a'), token(')'));
+			expect(parser('(a)', 0).success).toBe(true);
+			const res = parser('(b)', 0);
+			expect(res.success).toBe(false);
+			expect(res.offset).toBe(1);
+		});
+
+		it('can optionally make errors after the first parser fatal', () => {
+			const parser = optional(delimited(token('('), token('a'), token(')'), true));
+			expect(parser('(a)', 0).success).toBe(true);
+			expect(parser('(b)', 0).success).toBe(false);
+		});
+	});
+
 	describe('recognize', () => {
 		it('returns the part of the matched input accepted by the child parser', () => {
 			const parser = recognize(delimited(token('{'), token('meep'), token('}')));
@@ -174,6 +230,33 @@ describe('parser combinators', () => {
 			expect(res2.success).toBe(false);
 			expect(res2.offset).toBe(1);
 			expect((res2 as any).expected).toEqual(['meep']);
+		});
+	});
+
+	describe('peek', () => {
+		it('performs a look-ahead without consuming any actual input', () => {
+			const parser = peek(token('a'));
+			const res1 = parser('a', 0);
+			expect(res1.success).toBe(true);
+			expect(res1.offset).toBe(0);
+
+			const res2 = parser('b', 0);
+			expect(res2.success).toBe(false);
+			expect(res2.offset).toBe(0);
+		});
+	});
+
+	describe('complete', () => {
+		it('only accepts if all input is consumed', () => {
+			const parser = complete(token('a'));
+			const res1 = parser('a', 0);
+			expect(res1.success).toBe(true);
+			expect(res1.offset).toBe(1);
+
+			const res2 = parser('aa', 0);
+			expect(res2.success).toBe(false);
+			expect(res2.offset).toBe(1);
+			expect((res2 as any).expected).toEqual(['end of input']);
 		});
 	});
 });
