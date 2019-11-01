@@ -12,10 +12,11 @@
 	"module": "dist/prsc.mjs",
 	"scripts": {
 		"build:api": "api-extractor run; copyfiles --flat temp/* api",
+		"build:docs": "api-documenter markdown -i api -o docs",
 		"build:clean": "rimraf dist && rimraf lib",
 		"build:dirs": "mkdirp lib",
 		"build:bundle": "tsc -P tsconfig.build.json && rollup -c",
-		"build": "npm-run-all build:clean build:dirs build:bundle build:api",
+		"build": "npm-run-all build:clean build:dirs build:bundle build:api build:docs",
 		"prepare": "npm run build",
 		"test": "jest --coverage --verbose"
 	},
@@ -27,6 +28,7 @@
 		"url": "https://github.com/bwrrp/prsc.js"
 	},
 	"devDependencies": {
+		"@microsoft/api-documenter": "^7.5.4",
 		"@microsoft/api-extractor": "^7.5.2",
 		"@types/jest": "^24.0.19",
 		"copyfiles": "^2.1.1",
