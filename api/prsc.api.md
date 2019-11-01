@@ -4,52 +4,52 @@
 
 ```ts
 
-// @public (undocumented)
+// @public
 export function complete<T>(parser: Parser<T>): Parser<T>;
 
-// @public (undocumented)
+// @public
 export function cut<T>(parser: Parser<T>): Parser<T>;
 
-// @public (undocumented)
+// @public
 export function delimited<TOpen, T, TClose>(open: Parser<TOpen>, inner: Parser<T>, close: Parser<TClose>, cutAfterOpen?: boolean): Parser<T>;
 
-// @public (undocumented)
+// @public
 export const end: Parser<void>;
 
-// @public (undocumented)
+// @public
 export function error<T>(offset: number, expected: string[], fatal?: boolean): ParseResult<T>;
 
-// @public (undocumented)
+// @public
 export function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, expected: string[]): Parser<T>;
 
-// @public (undocumented)
+// @public
 export function first<T1, T2>(x: T1, y: T2): T1;
 
-// @public (undocumented)
+// @public
 export function followed<T, TAfter>(parser: Parser<T>, after: Parser<TAfter>): Parser<T>;
 
-// @public (undocumented)
+// @public
 export function map<T, U>(parser: Parser<T>, map: (v: T) => U): Parser<U>;
 
-// @public (undocumented)
+// @public
 export function not<T>(parser: Parser<T>, expected: string[]): Parser<void>;
 
-// @public (undocumented)
+// @public
 export function ok(offset: number): ParseResult<undefined>;
 
-// @public (undocumented)
+// @public
 export function okWithValue<T>(offset: number, value: T): ParseResult<T>;
 
-// @public (undocumented)
+// @public
 export function optional<T>(parser: Parser<T>): Parser<T | null>;
 
-// @public (undocumented)
+// @public
 export function or<T>(parsers: Parser<T>[]): Parser<T>;
 
-// @public (undocumented)
+// @public
 export type Parser<T> = (input: string, offset: number) => ParseResult<T>;
 
-// @public (undocumented)
+// @public
 export type ParseResult<T> = {
     success: true;
     offset: number;
@@ -61,28 +61,28 @@ export type ParseResult<T> = {
     fatal: boolean;
 };
 
-// @public (undocumented)
-export function peek<T>(parser: Parser<T>): Parser<void>;
+// @public
+export function peek<T>(parser: Parser<T>): Parser<T>;
 
-// @public (undocumented)
+// @public
 export function plus<T>(parser: Parser<T>): Parser<T[]>;
 
-// @public (undocumented)
+// @public
 export function preceded<TBefore, T>(before: Parser<TBefore>, parser: Parser<T>): Parser<T>;
 
-// @public (undocumented)
+// @public
 export function recognize<T>(parser: Parser<T>): Parser<string>;
 
-// @public (undocumented)
+// @public
 export function second<T1, T2>(x: T1, y: T2): T2;
 
-// @public (undocumented)
+// @public
 export function star<T>(parser: Parser<T>): Parser<T[]>;
 
-// @public (undocumented)
+// @public
 export function then<T1, T2, T>(parser1: Parser<T1>, parser2: Parser<T2>, join: (value1: T1, value2: T2) => T): Parser<T>;
 
-// @public (undocumented)
+// @public
 export function token(token: string): Parser<string>;
 
 
