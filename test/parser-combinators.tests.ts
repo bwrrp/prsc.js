@@ -13,7 +13,8 @@ import {
 	cut,
 	preceded,
 	peek,
-	complete
+	complete,
+	start
 } from '../src/parser-combinators';
 
 describe('parser combinators', () => {
@@ -243,6 +244,19 @@ describe('parser combinators', () => {
 			const res2 = parser('b', 0);
 			expect(res2.success).toBe(false);
 			expect(res2.offset).toBe(0);
+		});
+	});
+
+	describe('start', () => {
+		it('only matches at the start of the input', () => {
+			const res1 = start('a', 0);
+			expect(res1.success).toBe(true);
+			expect(res1.offset).toBe(0);
+
+			const res2 = start('a', 1);
+			expect(res2.success).toBe(false);
+			expect(res2.offset).toBe(1);
+			expect((res2 as any).expected).toEqual(['start of input']);
 		});
 	});
 

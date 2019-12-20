@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.5.5",
+    "toolVersion": "7.7.0",
     "schemaVersion": 1003,
     "oldestForwardsCompatibleVersion": 1001
   },
@@ -1638,6 +1638,32 @@
             }
           ],
           "name": "star"
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "prsc!start:var",
+          "docComment": "/**\n * A parser that only succeeds at the start of the input string.\n *\n * @param input - The input to match in\n *\n * @param offset - The offset in `input` at which to start matching\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "start: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "start",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          }
         },
         {
           "kind": "Function",

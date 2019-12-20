@@ -413,6 +413,17 @@ export function cut<T>(parser: Parser<T>): Parser<T> {
 }
 
 /**
+ * A parser that only succeeds at the start of the input string.
+ *
+ * @public
+ *
+ * @param input  - The input to match in
+ * @param offset - The offset in `input` at which to start matching
+ */
+export const start: Parser<void> = (_input, offset) =>
+	offset === 0 ? ok(offset) : error(offset, ['start of input']);
+
+/**
  * A parser that only succeeds if the end of the input string is reached.
  *
  * @public

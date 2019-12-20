@@ -80,6 +80,9 @@ export function second<T1, T2>(x: T1, y: T2): T2;
 export function star<T>(parser: Parser<T>): Parser<T[]>;
 
 // @public
+export const start: Parser<void>;
+
+// @public
 export function then<T1, T2, T>(parser1: Parser<T1>, parser2: Parser<T2>, join: (value1: T1, value2: T2) => T): Parser<T>;
 
 // @public

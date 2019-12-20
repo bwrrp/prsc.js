@@ -35,6 +35,7 @@
 |  Variable | Description |
 |  --- | --- |
 |  [end](./prsc.end.md) | A parser that only succeeds if the end of the input string is reached. |
+|  [start](./prsc.start.md) | A parser that only succeeds at the start of the input string. |
 
 ## Type Aliases
 
