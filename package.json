@@ -1,6 +1,6 @@
 {
 	"name": "prsc",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Tiny parser combinators library",
 	"author": "Stef Busking",
 	"license": "MIT",
