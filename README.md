@@ -2,7 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/prsc.svg)](https://badge.fury.io/js/prsc)
 [![Build Status](https://travis-ci.org/bwrrp/prsc.js.svg?branch=master)](https://travis-ci.org/bwrrp/prsc.js)
-[![Greenkeeper badge](https://badges.greenkeeper.io/bwrrp/prsc.js.svg)](https://greenkeeper.io/)
+
 
 Tiny parser combinators library for JavaScript and TypeScript. Heavily
 inspired by [nom](https://github.com/Geal/nom).
