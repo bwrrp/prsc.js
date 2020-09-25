@@ -16,9 +16,9 @@ export declare function recognize<T>(parser: Parser<T>): Parser<string>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | The parser to apply, value is discarded and replaced by the consumed input. |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to apply, value is discarded and replaced by the consumed input. |
 
 <b>Returns:</b>
 
-`Parser<string>`
+[Parser](./prsc.parser.md)<!-- -->&lt;string&gt;
 

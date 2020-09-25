@@ -16,11 +16,11 @@ export declare function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, 
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | Parser to filter |
-|  filter | <code>(v: T) =&gt; boolean</code> | Predicate function over the inner parser's values |
-|  expected | <code>string[]</code> | Expected values for parse errors generated when the filter rejects a value |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser to filter |
+|  filter | (v: T) =&gt; boolean | Predicate function over the inner parser's values |
+|  expected | string\[\] | Expected values for parse errors generated when the filter rejects a value |
 
 <b>Returns:</b>
 
-`Parser<T>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
 

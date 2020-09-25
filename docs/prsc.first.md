@@ -16,10 +16,10 @@ export declare function first<T1, T2>(x: T1, y: T2): T1;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  x | <code>T1</code> | Argument to return |
-|  y | <code>T2</code> | Argument to ignore |
+|  x | T1 | Argument to return |
+|  y | T2 | Argument to ignore |
 
 <b>Returns:</b>
 
-`T1`
+T1
 

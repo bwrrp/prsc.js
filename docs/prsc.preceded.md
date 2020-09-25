@@ -18,10 +18,10 @@ export declare function preceded<TBefore, T>(before: Parser<TBefore>, parser: Pa
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  before | <code>Parser&lt;TBefore&gt;</code> | First parser to apply, value is discarded |
-|  parser | <code>Parser&lt;T&gt;</code> | Second parser to apply, value is kept |
+|  before | [Parser](./prsc.parser.md)<!-- -->&lt;TBefore&gt; | First parser to apply, value is discarded |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Second parser to apply, value is kept |
 
 <b>Returns:</b>
 
-`Parser<T>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
 

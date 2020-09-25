@@ -16,9 +16,9 @@ export declare function token(token: string): Parser<string>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  token | <code>string</code> | The expected string |
+|  token | string | The expected string |
 
 <b>Returns:</b>
 
-`Parser<string>`
+[Parser](./prsc.parser.md)<!-- -->&lt;string&gt;
 

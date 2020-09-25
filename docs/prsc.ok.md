@@ -16,9 +16,9 @@ export declare function ok(offset: number): ParseResult<undefined>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  offset | <code>number</code> | The offset in the input at which to continue parsing |
+|  offset | number | The offset in the input at which to continue parsing |
 
 <b>Returns:</b>
 
-`ParseResult<undefined>`
+[ParseResult](./prsc.parseresult.md)<!-- -->&lt;undefined&gt;
 

@@ -16,9 +16,9 @@ export declare function cut<T>(parser: Parser<T>): Parser<T>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | The parser to wrap |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to wrap |
 
 <b>Returns:</b>
 
-`Parser<T>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
 

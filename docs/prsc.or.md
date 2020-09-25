@@ -16,9 +16,9 @@ export declare function or<T>(parsers: Parser<T>[]): Parser<T>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parsers | <code>Parser&lt;T&gt;[]</code> | Parsers to attempt to apply |
+|  parsers | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt;\[\] | Parsers to attempt to apply |
 
 <b>Returns:</b>
 
-`Parser<T>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
 

@@ -16,10 +16,10 @@ export declare function not<T>(parser: Parser<T>, expected: string[]): Parser<vo
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | The parser to apply |
-|  expected | <code>string[]</code> | Expected values for parse errors generated when the inner parser succeeds |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to apply |
+|  expected | string\[\] | Expected values for parse errors generated when the inner parser succeeds |
 
 <b>Returns:</b>
 
-`Parser<void>`
+[Parser](./prsc.parser.md)<!-- -->&lt;void&gt;
 

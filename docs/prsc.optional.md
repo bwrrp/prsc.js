@@ -18,9 +18,9 @@ export declare function optional<T>(parser: Parser<T>): Parser<T | null>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | Parser to attempt to apply |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser to attempt to apply |
 
 <b>Returns:</b>
 
-`Parser<T | null>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T \| null&gt;
 

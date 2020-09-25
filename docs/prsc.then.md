@@ -16,11 +16,11 @@ export declare function then<T1, T2, T>(parser1: Parser<T1>, parser2: Parser<T2>
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser1 | <code>Parser&lt;T1&gt;</code> | First parser to apply |
-|  parser2 | <code>Parser&lt;T2&gt;</code> | Parser to apply after the first one is successful |
-|  join | <code>(value1: T1, value2: T2) =&gt; T</code> | Function used to combine the values of both parsers |
+|  parser1 | [Parser](./prsc.parser.md)<!-- -->&lt;T1&gt; | First parser to apply |
+|  parser2 | [Parser](./prsc.parser.md)<!-- -->&lt;T2&gt; | Parser to apply after the first one is successful |
+|  join | (value1: T1, value2: T2) =&gt; T | Function used to combine the values of both parsers |
 
 <b>Returns:</b>
 
-`Parser<T>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
 

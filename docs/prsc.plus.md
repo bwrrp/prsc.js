@@ -18,9 +18,9 @@ export declare function plus<T>(parser: Parser<T>): Parser<T[]>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | The parser to apply repeatedly |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to apply repeatedly |
 
 <b>Returns:</b>
 
-`Parser<T[]>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T\[\]&gt;
 

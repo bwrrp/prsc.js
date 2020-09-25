@@ -16,10 +16,10 @@ export declare function okWithValue<T>(offset: number, value: T): ParseResult<T>
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  offset | <code>number</code> | The offset in the input at which to continue parsing |
-|  value | <code>T</code> | The value resulting from applying the parser |
+|  offset | number | The offset in the input at which to continue parsing |
+|  value | T | The value resulting from applying the parser |
 
 <b>Returns:</b>
 
-`ParseResult<T>`
+[ParseResult](./prsc.parseresult.md)<!-- -->&lt;T&gt;
 

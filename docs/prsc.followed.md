@@ -18,10 +18,10 @@ export declare function followed<T, TAfter>(parser: Parser<T>, after: Parser<TAf
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | First parser to apply, value is kept |
-|  after | <code>Parser&lt;TAfter&gt;</code> |  |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | First parser to apply, value is kept |
+|  after | [Parser](./prsc.parser.md)<!-- -->&lt;TAfter&gt; |  |
 
 <b>Returns:</b>
 
-`Parser<T>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
 

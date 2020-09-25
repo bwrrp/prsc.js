@@ -18,9 +18,9 @@ export declare function peek<T>(parser: Parser<T>): Parser<T>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | <code>Parser&lt;T&gt;</code> | The parser to apply, value is discarded and any progress made in input is reset. |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to apply, value is discarded and any progress made in input is reset. |
 
 <b>Returns:</b>
 
-`Parser<T>`
+[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
 

@@ -16,10 +16,10 @@ export declare function second<T1, T2>(x: T1, y: T2): T2;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  x | <code>T1</code> | Argument to ignore |
-|  y | <code>T2</code> | Argument to return |
+|  x | T1 | Argument to ignore |
+|  y | T2 | Argument to return |
 
 <b>Returns:</b>
 
-`T2`
+T2
 
