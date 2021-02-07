@@ -8,8 +8,8 @@
 		"parser",
 		"combinators"
 	],
-	"main": "dist/prsc.js",
-	"module": "dist/prsc.mjs",
+	"main": "dist/prsc.umd.js",
+	"module": "dist/prsc.esm.js",
 	"scripts": {
 		"build:clean": "rimraf dist && rimraf lib && rimraf temp",
 		"build:bundle": "tsc -P tsconfig.build.json && rollup -c",
