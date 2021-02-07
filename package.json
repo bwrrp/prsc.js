@@ -10,6 +10,7 @@
 	],
 	"main": "dist/prsc.umd.js",
 	"module": "dist/prsc.esm.js",
+	"types": "dist/prsc.d.ts",
 	"scripts": {
 		"build:clean": "rimraf dist && rimraf lib && rimraf temp",
 		"build:bundle": "tsc -P tsconfig.build.json && rollup -c",
