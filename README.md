@@ -1,7 +1,7 @@
 # prsc
 
 [![NPM version](https://badge.fury.io/js/prsc.svg)](https://badge.fury.io/js/prsc)
-[![Build Status](https://travis-ci.org/bwrrp/prsc.js.svg?branch=master)](https://travis-ci.org/bwrrp/prsc.js)
+[![CI](https://github.com/bwrrp/prsc.js/workflows/CI/badge.svg)](https://github.com/bwrrp/prsc.js/actions?query=workflow%3ACI)
 
 Tiny parser combinators library for JavaScript and TypeScript. Heavily
 inspired by [nom](https://github.com/Geal/nom).
@@ -50,7 +50,7 @@ const digit = (input, offset) => {
 const digits = plus(digit);
 
 // Then use recognize to get the matching string and use map to parse that into a number
-const number = map(recognize(digits), str => parseInt(str, 10));
+const number = map(recognize(digits), (str) => parseInt(str, 10));
 
 // Multiplication
 const term = then(

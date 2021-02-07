@@ -14,7 +14,7 @@ import {
 	preceded,
 	peek,
 	complete,
-	start
+	start,
 } from '../src/parser-combinators';
 
 describe('parser combinators', () => {
@@ -61,9 +61,11 @@ describe('parser combinators', () => {
 		});
 
 		it('replaces the expected value for child errors only if the child fails at the same offset', () => {
-			const parser = filter(then(token('a'), token('b'), (a, b) => b + a), () => true, [
-				'expected'
-			]);
+			const parser = filter(
+				then(token('a'), token('b'), (a, b) => b + a),
+				() => true,
+				['expected']
+			);
 			const res1 = parser('bb', 0);
 			expect(res1.success).toBe(false);
 			expect(res1.offset).toBe(0);
