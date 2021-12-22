@@ -88,7 +88,6 @@ export function then<T1, T2, T>(parser1: Parser<T1>, parser2: Parser<T2>, join: 
 // @public
 export function token(token: string): Parser<string>;
 
-
 // (No @packageDocumentation comment for this package)
 
 ```
