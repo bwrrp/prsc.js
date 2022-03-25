@@ -237,6 +237,72 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "prsc!consume:function(1)",
+          "docComment": "/**\n * Creates a Parser that applies the given parser but discards the resulting value.\n *\n * @param parser - Parser to apply\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function consume<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "consume"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "prsc!cut:function(1)",
           "docComment": "/**\n * Creates a parser that turns errors returned by the inner parser into fatal errors. Parsers such as `or` and `star` will not continue to attempt additional matches if a parser returns a fatal error, and will usually return the error instead.\n *\n * @param parser - The parser to wrap\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -563,6 +629,118 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "prsc!except:function(1)",
+          "docComment": "/**\n * Creates a Parser that matches only if the first Parser matches input at the starting position, but the second Parser does not.\n *\n * @param match - Parser that should match\n *\n * @param except - Parser that should not match\n *\n * @param expected - Expected values for parse errors generated when the except parser succeeds\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function except<T, U>(match: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", except: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<U>"
+            },
+            {
+              "kind": "Content",
+              "text": ", expected: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 9,
+            "endIndex": 11
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "match",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "parameterName": "except",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 6
+              }
+            },
+            {
+              "parameterName": "expected",
+              "parameterTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "U",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "except"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "prsc!filter:function(1)",
           "docComment": "/**\n * Creates a Parser that uses the given filter predicate to check values generated by the given parser. Values that pass the predicate are passed through, those that don't return a parse error instead.\n *\n * @param parser - Parser to filter\n *\n * @param filter - Predicate function over the inner parser's values\n *\n * @param expected - Expected values for parse errors generated when the filter rejects a value\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -656,6 +834,72 @@
             }
           ],
           "name": "filter"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!filterUndefined:function(1)",
+          "docComment": "/**\n * Creates a parser that discards undefined values from the array produced by the given parser.\n *\n * Useful in combination with `star`, `or` and `consume`:\n * ```\n * const a: Parser<string> = token('a');\n * const b: Parser<void> = consume(token('b'));\n * const abs: Parser<(string | void)[]> = star(or<string | void>([a, b]));\n * const as: Parser<string[]> = filterUndefined(abs);\n * ```\n *\n * @param parser - Parser to apply, should produce an array that may contain undefined entries.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function filterUndefined<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<(T | void)[]>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T[]>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "filterUndefined"
         },
         {
           "kind": "Function",
@@ -1581,6 +1825,69 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "prsc!range:function(1)",
+          "docComment": "/**\n * Creates a Parser that matches a single character from a range of codepoints.\n *\n * @param firstCodePoint - The first code point to accept\n *\n * @param lastCodePoint - The last code point to accept (inclusive)\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function range(firstCodePoint: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ", lastCodePoint: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "firstCodePoint",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "parameterName": "lastCodePoint",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "name": "range"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "prsc!recognize:function(1)",
           "docComment": "/**\n * Creates a parser that applies the given parser. If successful, the inner parser's value is discarded and the substring that was consumed from the input is returned as value instead. Errors are returned as-is.\n *\n * @param parser - The parser to apply, value is discarded and replaced by the consumed input.\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -1726,6 +2033,54 @@
             }
           ],
           "name": "second"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!skipChars:function(1)",
+          "docComment": "/**\n * Creates a Parser that skips the given number of characters.\n *\n * This counts in unicode characters (code points), not UTF-16 code units.\n *\n * @param nCodepoints - number of characters to skip\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function skipChars(nCodepoints: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "nCodepoints",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "skipChars"
         },
         {
           "kind": "Function",

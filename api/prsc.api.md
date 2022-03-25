@@ -8,6 +8,9 @@
 export function complete<T>(parser: Parser<T>): Parser<T>;
 
 // @public
+export function consume<T>(parser: Parser<T>): Parser<void>;
+
+// @public
 export function cut<T>(parser: Parser<T>): Parser<T>;
 
 // @public
@@ -20,7 +23,13 @@ export const end: Parser<void>;
 export function error<T>(offset: number, expected: string[], fatal?: boolean): ParseResult<T>;
 
 // @public
+export function except<T, U>(match: Parser<T>, except: Parser<U>, expected: string): Parser<T>;
+
+// @public
 export function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, expected: string[]): Parser<T>;
+
+// @public
+export function filterUndefined<T>(parser: Parser<(T | void)[]>): Parser<T[]>;
 
 // @public
 export function first<T1, T2>(x: T1, y: T2): T1;
@@ -71,10 +80,16 @@ export function plus<T>(parser: Parser<T>): Parser<T[]>;
 export function preceded<TBefore, T>(before: Parser<TBefore>, parser: Parser<T>): Parser<T>;
 
 // @public
+export function range(firstCodePoint: number, lastCodePoint: number): Parser<string>;
+
+// @public
 export function recognize<T>(parser: Parser<T>): Parser<string>;
 
 // @public
 export function second<T1, T2>(x: T1, y: T2): T2;
+
+// @public
+export function skipChars(nCodepoints: number): Parser<void>;
 
 // @public
 export function star<T>(parser: Parser<T>): Parser<T[]>;

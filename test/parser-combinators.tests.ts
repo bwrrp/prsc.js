@@ -15,6 +15,11 @@ import {
 	peek,
 	complete,
 	start,
+	range,
+	skipChars,
+	consume,
+	except,
+	filterUndefined,
 } from '../src/parser-combinators';
 
 describe('parser combinators', () => {
@@ -28,6 +33,28 @@ describe('parser combinators', () => {
 			expect(token('zaz')('zzazz', 0).offset).toBe(0);
 			expect(token('zaz')('zzazz', 7).success).toBe(false);
 			expect(token('zaz')('zzazz', 7).offset).toBe(7);
+		});
+	});
+
+	describe('range', () => {
+		it('accepts one from a range of unicode characters', () => {
+			expect(range('a'.codePointAt(0)!, 'z'.codePointAt(0)!)('q', 0).success).toBe(true);
+			expect(range('a'.codePointAt(0)!, 'z'.codePointAt(0)!)('q', 0).offset).toBe(1);
+			expect(range(0x10000, 0x10ffff)('\u{1f4a9}', 0).success).toBe(true);
+			expect(range(0x10000, 0x10ffff)('\u{1f4a9}', 0).offset).toBe(2);
+			expect(range(0x10000, 0x10ffff)('a', 0).success).toBe(false);
+			expect(range(0x10000, 0x10ffff)('a', 0).offset).toBe(0);
+		});
+	});
+
+	describe('skipChars', () => {
+		it('skips the given number of code points, if they exist', () => {
+			expect(skipChars(1)('a', 0).success).toBe(true);
+			expect(skipChars(1)('a', 0).offset).toBe(1);
+			expect(skipChars(2)('a', 0).success).toBe(false);
+			expect(skipChars(2)('a', 0).offset).toBe(1);
+			expect(skipChars(1)('\u{1f4a9}', 0).success).toBe(true);
+			expect(skipChars(1)('\u{1f4a9}', 0).offset).toBe(2);
 		});
 	});
 
@@ -45,6 +72,23 @@ describe('parser combinators', () => {
 			expect(mapped('zzazz', 0).offset).toBe(0);
 			expect(mapped('zzazz', 7).success).toBe(false);
 			expect(mapped('zzazz', 7).offset).toBe(7);
+		});
+	});
+
+	describe('consume', () => {
+		it("discards the inner parser's value", () => {
+			const res = consume(token('a'))('zzazz', 2);
+			expect(res.success).toBe(true);
+			expect((res as any).value).toBe(undefined);
+			expect(res.offset).toBe(3);
+		});
+
+		it('propagates failure', () => {
+			const consumed = consume(token('a'));
+			expect(consumed('zzazz', 0).success).toBe(false);
+			expect(consumed('zzazz', 0).offset).toBe(0);
+			expect(consumed('zzazz', 7).success).toBe(false);
+			expect(consumed('zzazz', 7).offset).toBe(7);
 		});
 	});
 
@@ -148,12 +192,31 @@ describe('parser combinators', () => {
 			expect((parser('aaa', 0) as any).value).toEqual(['a', 'a', 'a']);
 		});
 
+		it('does not end up in an infinite loop if the inner parser does not consume input', () => {
+			const parser = star(not(token('a'), ['not a']));
+			expect(parser('b', 0).success).toBe(true);
+			expect(parser('b', 0).offset).toBe(0);
+			expect((parser('b', 0) as any).value).toEqual([undefined]);
+		});
+
 		it('returns failure for fatal errors', () => {
 			const parser = star(cut(token('a')));
 			const res = parser('aaab', 0);
 			expect(res.success).toBe(false);
 			expect(res.offset).toBe(3);
 			expect((res as any).expected).toEqual(['a']);
+		});
+	});
+
+	describe('filterUndefined', () => {
+		it('discards undefined values from the array produced by the inner parser', () => {
+			const a = token('a');
+			const b = consume(token('b'));
+			const abs = star(or<string | void>([a, b]));
+			const as = filterUndefined(abs);
+			expect(as('ababab', 0).success).toBe(true);
+			expect(as('ababab', 0).offset).toBe(6);
+			expect((as('ababab', 0) as any).value).toEqual(['a', 'a', 'a']);
 		});
 	});
 
@@ -202,6 +265,28 @@ describe('parser combinators', () => {
 			const parser = not(token('a'), ['not a']);
 			expect(parser('b', 0).success).toBe(true);
 			expect(parser('b', 0).offset).toBe(0);
+		});
+	});
+
+	describe('except', () => {
+		it('fails if the first parser fails', () => {
+			const parser = except(token('b'), token('c'), ['b not c']);
+			expect(parser('a', 0).success).toBe(false);
+			expect(parser('a', 0).offset).toBe(0);
+			expect((parser('a', 0) as any).expected).toEqual(['b']);
+		});
+
+		it('fails if the second parser matches', () => {
+			const parser = except(token('a'), token('a'), ['a not a']);
+			expect(parser('a', 0).success).toBe(false);
+			expect(parser('a', 0).offset).toBe(0);
+			expect((parser('a', 0) as any).expected).toEqual(['a not a']);
+		});
+
+		it('succeeds if the first matches and the second does not', () => {
+			const parser = except(token('b'), token('a'), ['b not a']);
+			expect(parser('b', 0).success).toBe(true);
+			expect(parser('b', 0).offset).toBe(1);
 		});
 	});
 
