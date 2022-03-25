@@ -201,6 +201,10 @@ export function star<T>(parser: Parser<T>): Parser<T[]> {
 				break;
 			}
 			ts.push(res.value);
+			if (res.offset === nextOffset) {
+				// Did not advance
+				break;
+			}
 			nextOffset = res.offset;
 		}
 
