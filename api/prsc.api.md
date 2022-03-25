@@ -5,6 +5,9 @@
 ```ts
 
 // @public
+export function collect<T, R>(gen: Generator<T, R>): [T[], R];
+
+// @public
 export function complete<T>(parser: Parser<T>): Parser<T>;
 
 // @public
@@ -96,6 +99,27 @@ export function star<T>(parser: Parser<T>): Parser<T[]>;
 
 // @public
 export const start: Parser<void>;
+
+// @public
+export function streaming<T>(parser: Parser<T>): StreamingParser<T>;
+
+// @public
+export function streamingComplete<T>(parser: StreamingParser<T>): StreamingParser<T>;
+
+// @public
+export function streamingFilterUndefined<T>(parser: StreamingParser<T | void>): StreamingParser<T>;
+
+// @public
+export function streamingOptional<T>(parser: StreamingParser<T>): StreamingParser<T>;
+
+// @public
+export type StreamingParser<T> = (input: string, offset: number) => Generator<T, ParseResult<unknown>>;
+
+// @public
+export function streamingStar<T>(parser: StreamingParser<T>): StreamingParser<T>;
+
+// @public
+export function streamingThen<T, U>(parser1: StreamingParser<T>, parser2: StreamingParser<U>): StreamingParser<T | U>;
 
 // @public
 export function then<T1, T2, T>(parser1: Parser<T1>, parser2: Parser<T2>, join: (value1: T1, value2: T2) => T): Parser<T>;

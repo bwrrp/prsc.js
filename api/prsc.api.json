@@ -171,6 +171,78 @@
       "members": [
         {
           "kind": "Function",
+          "canonicalReference": "prsc!collect:function(1)",
+          "docComment": "/**\n * Helper to collect both the yielded values and the returned value from a generator.\n *\n * @param gen - Generator to collect from\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function collect<T, R>(gen: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Generator",
+              "canonicalReference": "!Generator:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T, R>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "[T[], R]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "gen",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "R",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "collect"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "prsc!complete:function(1)",
           "docComment": "/**\n * Creates a Parser that applies the given parser and only succeeds (returning the inner parser's result) if parsing concludes at the end of the input string.\n *\n * @param parser - The parser to wrap\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -2173,6 +2245,489 @@
             "startIndex": 1,
             "endIndex": 3
           }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!streaming:function(1)",
+          "docComment": "/**\n * Creates a StreamingParser which applies the given Parser and yields the value produced if it matches.\n *\n * @param parser - The Parser to apply\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function streaming<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "streaming"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!streamingComplete:function(1)",
+          "docComment": "/**\n * Creates a StreamingParser that applies the given parser and directly yields values produced by it, and then only succeeds if parsing concludes at the end of the input string.\n *\n * @param parser - StreamingParser to apply\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function streamingComplete<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "streamingComplete"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!streamingFilterUndefined:function(1)",
+          "docComment": "/**\n * Creates a StreamingParser which discards undefined values yielded by the given StreamingParser.\n *\n * @param parser - The StreamingParser to filter\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function streamingFilterUndefined<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T | void>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "streamingFilterUndefined"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!streamingOptional:function(1)",
+          "docComment": "/**\n * Creates a StreamingParser that tries to apply the given parser optionally. It only yields the values produced by the inner parser if it matches successfully, and does not yield anything otherwise.\n *\n * @param parser - StreamingParser to attempt to apply\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function streamingOptional<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "streamingOptional"
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "prsc!StreamingParser:type",
+          "docComment": "/**\n * A StreamingParser is similar to a Parser, but instead of returning a value when parsing is complete it can parse incrementally and yield values as they are produced. The generator returns a ParseResult when iteration is done which indicates whether parsing was successful.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type StreamingParser<T> = "
+            },
+            {
+              "kind": "Content",
+              "text": "(input: string, offset: number) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Generator",
+              "canonicalReference": "!Generator:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T, "
+            },
+            {
+              "kind": "Reference",
+              "text": "ParseResult",
+              "canonicalReference": "prsc!ParseResult:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StreamingParser",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!streamingStar:function(1)",
+          "docComment": "/**\n * Creates a StreamingParser that tries to apply the given StreamingParser zero or more times in sequence. Values produced during each iteration are only yielded whenever the inner parser matches successfully.\n *\n * @param parser - StreamingParser to apply repeatedly\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function streamingStar<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "streamingStar"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!streamingThen:function(1)",
+          "docComment": "/**\n * Creates a StreamingParser which applies the given two StreamingParsers in sequence.\n *\n * Unlike `then`, this does not combine values using a function, but instead simply yields the values produced by both parsers as they produce them.\n *\n * @param parser1 - First StreamingParser to apply\n *\n * @param parser2 - StreamingParser to apply if the first one is successful\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function streamingThen<T, U>(parser1: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", parser2: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<U>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "StreamingParser",
+              "canonicalReference": "prsc!StreamingParser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T | U>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 7,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser1",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "parameterName": "parser2",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 6
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "U",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "streamingThen"
         },
         {
           "kind": "Function",

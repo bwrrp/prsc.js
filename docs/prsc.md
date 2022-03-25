@@ -8,6 +8,7 @@
 
 |  Function | Description |
 |  --- | --- |
+|  [collect(gen)](./prsc.collect.md) | Helper to collect both the yielded values and the returned value from a generator. |
 |  [complete(parser)](./prsc.complete.md) | Creates a Parser that applies the given parser and only succeeds (returning the inner parser's result) if parsing concludes at the end of the input string. |
 |  [consume(parser)](./prsc.consume.md) | Creates a Parser that applies the given parser but discards the resulting value. |
 |  [cut(parser)](./prsc.cut.md) | Creates a Parser that turns errors returned by the inner parser into fatal errors. Parsers such as <code>or</code> and <code>star</code> will not continue to attempt additional matches if a parser returns a fatal error, and will usually return the error instead. |
@@ -39,6 +40,12 @@ const as: Parser<string[]> = filterUndefined(abs);
 |  [second(x, y)](./prsc.second.md) | Returns the second of the given two arguments. Useful as a <code>join</code> function for <code>then</code>. See also <code>preceded</code>. |
 |  [skipChars(nCodepoints)](./prsc.skipchars.md) | Creates a Parser that skips the given number of characters.<!-- -->This counts in unicode characters (code points), not UTF-16 code units. |
 |  [star(parser)](./prsc.star.md) | Creates a Parser that tries to apply the given parser zero or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values.<!-- -->If the inner parser returns a fatal failure, the error is returned as-is. |
+|  [streaming(parser)](./prsc.streaming.md) | Creates a StreamingParser which applies the given Parser and yields the value produced if it matches. |
+|  [streamingComplete(parser)](./prsc.streamingcomplete.md) | Creates a StreamingParser that applies the given parser and directly yields values produced by it, and then only succeeds if parsing concludes at the end of the input string. |
+|  [streamingFilterUndefined(parser)](./prsc.streamingfilterundefined.md) | Creates a StreamingParser which discards undefined values yielded by the given StreamingParser. |
+|  [streamingOptional(parser)](./prsc.streamingoptional.md) | Creates a StreamingParser that tries to apply the given parser optionally. It only yields the values produced by the inner parser if it matches successfully, and does not yield anything otherwise. |
+|  [streamingStar(parser)](./prsc.streamingstar.md) | Creates a StreamingParser that tries to apply the given StreamingParser zero or more times in sequence. Values produced during each iteration are only yielded whenever the inner parser matches successfully. |
+|  [streamingThen(parser1, parser2)](./prsc.streamingthen.md) | Creates a StreamingParser which applies the given two StreamingParsers in sequence.<!-- -->Unlike <code>then</code>, this does not combine values using a function, but instead simply yields the values produced by both parsers as they produce them. |
 |  [then(parser1, parser2, join)](./prsc.then.md) | Creates a Parser that applies the given two parsers in sequence, returning success only if both succeed. The given join function is used to combine the values from both parsers into the single value to return. If either parser fails, the failure is returned as-is. |
 |  [token(token)](./prsc.token.md) | Creates a Parser that matches the given string. |
 
@@ -55,4 +62,5 @@ const as: Parser<string[]> = filterUndefined(abs);
 |  --- | --- |
 |  [Parser](./prsc.parser.md) | A parser is a function that tries to match whatever it expects at the given offset in the input string. Returns a ParseResult. |
 |  [ParseResult](./prsc.parseresult.md) | The result of parsing - either success (with an offset at which to resume parsing the next thing) or failure. If a failure is fatal, parsing should not continue to try alternative options.<!-- -->A ParseResult may contain a value that represents the parsed input. |
+|  [StreamingParser](./prsc.streamingparser.md) | A StreamingParser is similar to a Parser, but instead of returning a value when parsing is complete it can parse incrementally and yield values as they are produced. The generator returns a ParseResult when iteration is done which indicates whether parsing was successful. |
 
