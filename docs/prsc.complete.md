@@ -4,7 +4,7 @@
 
 ## complete() function
 
-Creates a parser that applies the given parser and only succeeds (returning the inner parser's result) if parsing concludes at the end of the input string.
+Creates a Parser that applies the given parser and only succeeds (returning the inner parser's result) if parsing concludes at the end of the input string.
 
 <b>Signature:</b>
 

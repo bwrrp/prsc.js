@@ -9,7 +9,7 @@ Creates a Parser that matches only if the first Parser matches input at the star
 <b>Signature:</b>
 
 ```typescript
-export declare function except<T, U>(match: Parser<T>, except: Parser<U>, expected: string): Parser<T>;
+export declare function except<T, U>(match: Parser<T>, except: Parser<U>, expected: string[]): Parser<T>;
 ```
 
 ## Parameters
@@ -18,7 +18,7 @@ export declare function except<T, U>(match: Parser<T>, except: Parser<U>, expect
 |  --- | --- | --- |
 |  match | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser that should match |
 |  except | [Parser](./prsc.parser.md)<!-- -->&lt;U&gt; | Parser that should not match |
-|  expected | string | Expected values for parse errors generated when the except parser succeeds |
+|  expected | string\[\] | Expected values for parse errors generated when the except parser succeeds |
 
 <b>Returns:</b>
 

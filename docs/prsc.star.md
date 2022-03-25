@@ -4,7 +4,7 @@
 
 ## star() function
 
-Creates a parser that tries to apply the given parser zero or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values.
+Creates a Parser that tries to apply the given parser zero or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values.
 
 If the inner parser returns a fatal failure, the error is returned as-is.
 

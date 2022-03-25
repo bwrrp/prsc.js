@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.19.2",
+    "toolVersion": "7.19.5",
     "schemaVersion": 1004,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -172,7 +172,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!complete:function(1)",
-          "docComment": "/**\n * Creates a parser that applies the given parser and only succeeds (returning the inner parser's result) if parsing concludes at the end of the input string.\n *\n * @param parser - The parser to wrap\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that applies the given parser and only succeeds (returning the inner parser's result) if parsing concludes at the end of the input string.\n *\n * @param parser - The parser to wrap\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -304,7 +304,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!cut:function(1)",
-          "docComment": "/**\n * Creates a parser that turns errors returned by the inner parser into fatal errors. Parsers such as `or` and `star` will not continue to attempt additional matches if a parser returns a fatal error, and will usually return the error instead.\n *\n * @param parser - The parser to wrap\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that turns errors returned by the inner parser into fatal errors. Parsers such as `or` and `star` will not continue to attempt additional matches if a parser returns a fatal error, and will usually return the error instead.\n *\n * @param parser - The parser to wrap\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -664,7 +664,7 @@
             },
             {
               "kind": "Content",
-              "text": "string"
+              "text": "string[]"
             },
             {
               "kind": "Content",
@@ -1175,7 +1175,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!not:function(1)",
-          "docComment": "/**\n * Creates a parser that succeeds at the starting offset if the given parser fails and vice-versa.\n *\n * @param parser - The parser to apply\n *\n * @param expected - Expected values for parse errors generated when the inner parser succeeds\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that succeeds at the starting offset if the given parser fails and vice-versa.\n *\n * @param parser - The parser to apply\n *\n * @param expected - Expected values for parse errors generated when the inner parser succeeds\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1380,7 +1380,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!optional:function(1)",
-          "docComment": "/**\n * Creates a parser that tries to apply the given parser optionally. It returns the inner parser's result if succesful, and otherwise indicates success at the starting offset with a `null` value.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - Parser to attempt to apply\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that tries to apply the given parser optionally. It returns the inner parser's result if succesful, and otherwise indicates success at the starting offset with a `null` value.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - Parser to attempt to apply\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1446,7 +1446,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!or:function(1)",
-          "docComment": "/**\n * Creates a parser that applies each of the given parsers in turn until one matches, then returns that parser's result. If no parser matches, an error is returned reflecting the furthest offset reached in the input string. If any parser returns a fatal error, no further branches are tried.\n *\n * @param parsers - Parsers to attempt to apply\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that applies each of the given parsers in turn until one matches, then returns that parser's result. If no parser matches, an error is returned reflecting the furthest offset reached in the input string. If any parser returns a fatal error, no further branches are tried.\n *\n * @param parsers - Parsers to attempt to apply\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1597,7 +1597,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!peek:function(1)",
-          "docComment": "/**\n * Creates a parser that applies the given parser without consuming any input. That is, if the inner parser is successful, success is returned (with the resulting value) at the starting offset, effectively making the parser consume no input.\n *\n * Errors returned by the inner parser are returned as-is.\n *\n * @param parser - The parser to apply, value is discarded and any progress made in input is reset.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that applies the given parser without consuming any input. That is, if the inner parser is successful, success is returned (with the resulting value) at the starting offset, effectively making the parser consume no input.\n *\n * Errors returned by the inner parser are returned as-is.\n *\n * @param parser - The parser to apply, value is discarded and any progress made in input is reset.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1663,7 +1663,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!plus:function(1)",
-          "docComment": "/**\n * Creates a parser that tries to apply the given parser one or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values. The parser is required to match at least once, so an initial failure is returned as-is.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - The parser to apply repeatedly\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that tries to apply the given parser one or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values. The parser is required to match at least once, so an initial failure is returned as-is.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - The parser to apply repeatedly\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1889,7 +1889,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!recognize:function(1)",
-          "docComment": "/**\n * Creates a parser that applies the given parser. If successful, the inner parser's value is discarded and the substring that was consumed from the input is returned as value instead. Errors are returned as-is.\n *\n * @param parser - The parser to apply, value is discarded and replaced by the consumed input.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that applies the given parser. If successful, the inner parser's value is discarded and the substring that was consumed from the input is returned as value instead. Errors are returned as-is.\n *\n * @param parser - The parser to apply, value is discarded and replaced by the consumed input.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2085,7 +2085,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!star:function(1)",
-          "docComment": "/**\n * Creates a parser that tries to apply the given parser zero or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - Parser to apply repeatedly\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that tries to apply the given parser zero or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - Parser to apply repeatedly\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2177,7 +2177,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!then:function(1)",
-          "docComment": "/**\n * Creates a parser that applies the given two parsers in sequence, returning success only if both succeed. The given join function is used to combine the values from both parsers into the single value to return. If either parser fails, the failure is returned as-is.\n *\n * @param parser1 - First parser to apply\n *\n * @param parser2 - Parser to apply after the first one is successful\n *\n * @param join - Function used to combine the values of both parsers\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that applies the given two parsers in sequence, returning success only if both succeed. The given join function is used to combine the values from both parsers into the single value to return. If either parser fails, the failure is returned as-is.\n *\n * @param parser1 - First parser to apply\n *\n * @param parser2 - Parser to apply after the first one is successful\n *\n * @param join - Function used to combine the values of both parsers\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

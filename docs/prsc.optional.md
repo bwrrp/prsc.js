@@ -4,7 +4,7 @@
 
 ## optional() function
 
-Creates a parser that tries to apply the given parser optionally. It returns the inner parser's result if succesful, and otherwise indicates success at the starting offset with a `null` value.
+Creates a Parser that tries to apply the given parser optionally. It returns the inner parser's result if succesful, and otherwise indicates success at the starting offset with a `null` value.
 
 If the inner parser returns a fatal failure, the error is returned as-is.
 

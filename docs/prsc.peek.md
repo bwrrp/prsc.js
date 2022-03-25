@@ -4,7 +4,7 @@
 
 ## peek() function
 
-Creates a parser that applies the given parser without consuming any input. That is, if the inner parser is successful, success is returned (with the resulting value) at the starting offset, effectively making the parser consume no input.
+Creates a Parser that applies the given parser without consuming any input. That is, if the inner parser is successful, success is returned (with the resulting value) at the starting offset, effectively making the parser consume no input.
 
 Errors returned by the inner parser are returned as-is.
 

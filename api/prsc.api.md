@@ -23,7 +23,7 @@ export const end: Parser<void>;
 export function error<T>(offset: number, expected: string[], fatal?: boolean): ParseResult<T>;
 
 // @public
-export function except<T, U>(match: Parser<T>, except: Parser<U>, expected: string): Parser<T>;
+export function except<T, U>(match: Parser<T>, except: Parser<U>, expected: string[]): Parser<T>;
 
 // @public
 export function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, expected: string[]): Parser<T>;

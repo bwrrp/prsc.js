@@ -4,7 +4,7 @@
 
 ## then() function
 
-Creates a parser that applies the given two parsers in sequence, returning success only if both succeed. The given join function is used to combine the values from both parsers into the single value to return. If either parser fails, the failure is returned as-is.
+Creates a Parser that applies the given two parsers in sequence, returning success only if both succeed. The given join function is used to combine the values from both parsers into the single value to return. If either parser fails, the failure is returned as-is.
 
 <b>Signature:</b>
 

@@ -4,7 +4,7 @@
 
 ## not() function
 
-Creates a parser that succeeds at the starting offset if the given parser fails and vice-versa.
+Creates a Parser that succeeds at the starting offset if the given parser fails and vice-versa.
 
 <b>Signature:</b>
 

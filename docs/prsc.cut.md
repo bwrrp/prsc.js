@@ -4,7 +4,7 @@
 
 ## cut() function
 
-Creates a parser that turns errors returned by the inner parser into fatal errors. Parsers such as `or` and `star` will not continue to attempt additional matches if a parser returns a fatal error, and will usually return the error instead.
+Creates a Parser that turns errors returned by the inner parser into fatal errors. Parsers such as `or` and `star` will not continue to attempt additional matches if a parser returns a fatal error, and will usually return the error instead.
 
 <b>Signature:</b>
 

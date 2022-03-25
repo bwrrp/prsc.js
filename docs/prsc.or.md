@@ -4,7 +4,7 @@
 
 ## or() function
 
-Creates a parser that applies each of the given parsers in turn until one matches, then returns that parser's result. If no parser matches, an error is returned reflecting the furthest offset reached in the input string. If any parser returns a fatal error, no further branches are tried.
+Creates a Parser that applies each of the given parsers in turn until one matches, then returns that parser's result. If no parser matches, an error is returned reflecting the furthest offset reached in the input string. If any parser returns a fatal error, no further branches are tried.
 
 <b>Signature:</b>
 

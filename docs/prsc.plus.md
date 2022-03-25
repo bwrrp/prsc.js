@@ -4,7 +4,7 @@
 
 ## plus() function
 
-Creates a parser that tries to apply the given parser one or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values. The parser is required to match at least once, so an initial failure is returned as-is.
+Creates a Parser that tries to apply the given parser one or more times in sequence. Values for successful matches are collected in an array. Once the inner parser no longer matches, success is returned at the offset reached with the accumulated values. The parser is required to match at least once, so an initial failure is returned as-is.
 
 If the inner parser returns a fatal failure, the error is returned as-is.
 
