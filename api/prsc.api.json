@@ -171,6 +171,69 @@
       "members": [
         {
           "kind": "Function",
+          "canonicalReference": "prsc!codepoint:function(1)",
+          "docComment": "/**\n * Creates a Parser that skips the next code point if the given predicate returns true.\n *\n * This counts in unicode characters (code points), not UTF-16 code units.\n *\n * @param isMatch - callback called with the next codepoint, should return whether that matches\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function codepoint(isMatch: "
+            },
+            {
+              "kind": "Content",
+              "text": "(codepoint: number) => boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ", expected: "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "isMatch",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "parameterName": "expected",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "name": "codepoint"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "prsc!collect:function(1)",
           "docComment": "/**\n * Helper to collect both the yielded values and the returned value from a generator.\n *\n * @param gen - Generator to collect from\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -1518,7 +1581,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!or:function(1)",
-          "docComment": "/**\n * Creates a Parser that applies each of the given parsers in turn until one matches, then returns that parser's result. If no parser matches, an error is returned reflecting the furthest offset reached in the input string. If any parser returns a fatal error, no further branches are tried.\n *\n * @param parsers - Parsers to attempt to apply\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that applies each of the given parsers in turn until one matches, then returns that parser's result. If no parser matches, an error is returned reflecting the furthest offset reached in the input string. If any parser returns a fatal error, no further branches are tried.\n *\n * @param parsers - Parsers to attempt to apply\n *\n * @param expected - Overrides the expected value used if none of the inner parsers match\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1532,6 +1595,14 @@
             {
               "kind": "Content",
               "text": "<T>[]"
+            },
+            {
+              "kind": "Content",
+              "text": ", expected?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
             },
             {
               "kind": "Content",
@@ -1552,8 +1623,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 4,
-            "endIndex": 6
+            "startIndex": 6,
+            "endIndex": 8
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1563,6 +1634,13 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
+              }
+            },
+            {
+              "parameterName": "expected",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
               }
             }
           ],
@@ -1800,6 +1878,72 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "prsc!plusConsumed:function(1)",
+          "docComment": "/**\n * Creates a Parser that tries to apply the given parser one or more times in sequence. Values for successful matches are discarded. Once the inner parser no longer matches, success is returned at the offset reached. The parser is required to match at least once, so an initial failure is returned as-is.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - The parser to apply repeatedly\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function plusConsumed<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "plusConsumed"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "prsc!preceded:function(1)",
           "docComment": "/**\n * Creates a Parser that applies the given two parsers in sequence, returning the result of the second if the first succeeds.\n *\n * Equivalent to `then(before, parser, second)`.\n *\n * @param before - First parser to apply, value is discarded\n *\n * @param parser - Second parser to apply, value is kept\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -1898,7 +2042,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!range:function(1)",
-          "docComment": "/**\n * Creates a Parser that matches a single character from a range of codepoints.\n *\n * @param firstCodePoint - The first code point to accept\n *\n * @param lastCodePoint - The last code point to accept (inclusive)\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that matches a single character from a range of codepoints.\n *\n * Use `recognize` if you need the character that was matched.\n *\n * @param firstCodePoint - The first code point to accept\n *\n * @param lastCodePoint - The last code point to accept (inclusive)\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1918,6 +2062,14 @@
             },
             {
               "kind": "Content",
+              "text": ", expected?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
               "text": "): "
             },
             {
@@ -1927,7 +2079,7 @@
             },
             {
               "kind": "Content",
-              "text": "<string>"
+              "text": "<void>"
             },
             {
               "kind": "Content",
@@ -1935,8 +2087,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
+            "startIndex": 7,
+            "endIndex": 9
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1954,6 +2106,13 @@
                 "startIndex": 3,
                 "endIndex": 4
               }
+            },
+            {
+              "parameterName": "expected",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              }
             }
           ],
           "name": "range"
@@ -1961,7 +2120,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!recognize:function(1)",
-          "docComment": "/**\n * Creates a Parser that applies the given parser. If successful, the inner parser's value is discarded and the substring that was consumed from the input is returned as value instead. Errors are returned as-is.\n *\n * @param parser - The parser to apply, value is discarded and replaced by the consumed input.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that applies the given parser. If successful, the inner parser's value is discarded and the substring that was consumed from the input is returned as value instead. Errors are returned as-is.\n *\n * When using this in combination with `star` or `plus`, consider using `starConsumed` or `plusConsumed` instead for efficiency.\n *\n * @param parser - The parser to apply, value is discarded and replaced by the consumed input.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2219,6 +2378,72 @@
             }
           ],
           "name": "star"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!starConsumed:function(1)",
+          "docComment": "/**\n * Creates a Parser that tries to apply the given parser zero or more times in sequence. Values for successful matches are discarded. Once the inner parser no longer matches, success is returned at the offset reached.\n *\n * If the inner parser returns a fatal failure, the error is returned as-is.\n *\n * @param parser - Parser to apply repeatedly\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function starConsumed<T>(parser: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parser",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "starConsumed"
         },
         {
           "kind": "Variable",

@@ -6,6 +6,8 @@
 
 Creates a Parser that applies the given parser. If successful, the inner parser's value is discarded and the substring that was consumed from the input is returned as value instead. Errors are returned as-is.
 
+When using this in combination with `star` or `plus`<!-- -->, consider using `starConsumed` or `plusConsumed` instead for efficiency.
+
 <b>Signature:</b>
 
 ```typescript

@@ -5,6 +5,9 @@
 ```ts
 
 // @public
+export function codepoint(isMatch: (codepoint: number) => boolean, expected: string[]): Parser<void>;
+
+// @public
 export function collect<T, R>(gen: Generator<T, R>): [T[], R];
 
 // @public
@@ -56,7 +59,7 @@ export function okWithValue<T>(offset: number, value: T): ParseResult<T>;
 export function optional<T>(parser: Parser<T>): Parser<T | null>;
 
 // @public
-export function or<T>(parsers: Parser<T>[]): Parser<T>;
+export function or<T>(parsers: Parser<T>[], expected?: string[]): Parser<T>;
 
 // @public
 export type Parser<T> = (input: string, offset: number) => ParseResult<T>;
@@ -80,10 +83,13 @@ export function peek<T>(parser: Parser<T>): Parser<T>;
 export function plus<T>(parser: Parser<T>): Parser<T[]>;
 
 // @public
+export function plusConsumed<T>(parser: Parser<T>): Parser<void>;
+
+// @public
 export function preceded<TBefore, T>(before: Parser<TBefore>, parser: Parser<T>): Parser<T>;
 
 // @public
-export function range(firstCodePoint: number, lastCodePoint: number): Parser<string>;
+export function range(firstCodePoint: number, lastCodePoint: number, expected?: string[]): Parser<void>;
 
 // @public
 export function recognize<T>(parser: Parser<T>): Parser<string>;
@@ -96,6 +102,9 @@ export function skipChars(nCodepoints: number): Parser<void>;
 
 // @public
 export function star<T>(parser: Parser<T>): Parser<T[]>;
+
+// @public
+export function starConsumed<T>(parser: Parser<T>): Parser<void>;
 
 // @public
 export const start: Parser<void>;

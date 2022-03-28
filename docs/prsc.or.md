@@ -9,7 +9,7 @@ Creates a Parser that applies each of the given parsers in turn until one matche
 <b>Signature:</b>
 
 ```typescript
-export declare function or<T>(parsers: Parser<T>[]): Parser<T>;
+export declare function or<T>(parsers: Parser<T>[], expected?: string[]): Parser<T>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ export declare function or<T>(parsers: Parser<T>[]): Parser<T>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  parsers | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt;\[\] | Parsers to attempt to apply |
+|  expected | string\[\] | Overrides the expected value used if none of the inner parsers match |
 
 <b>Returns:</b>
 

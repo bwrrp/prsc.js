@@ -76,25 +76,53 @@ export function token(token: string): Parser<string> {
 	};
 }
 
+function lengthFromCodePoint(cp: number): number {
+	return cp > 0xffff ? 2 : 1;
+}
+
+/**
+ * Creates a Parser that skips the next code point if the given predicate returns true.
+ *
+ * This counts in unicode characters (code points), not UTF-16 code units.
+ *
+ * @public
+ *
+ * @param isMatch - callback called with the next codepoint, should return whether that matches
+ */
+export function codepoint(
+	isMatch: (codepoint: number) => boolean,
+	expected: string[]
+): Parser<void> {
+	return (input: string, offset: number) => {
+		const cp = input.codePointAt(offset);
+		if (cp === undefined || !isMatch(cp)) {
+			return error(offset, expected);
+		}
+		return ok(offset + lengthFromCodePoint(cp));
+	};
+}
+
 /**
  * Creates a Parser that matches a single character from a range of codepoints.
+ *
+ * Use `recognize` if you need the character that was matched.
  *
  * @public
  *
  * @param firstCodePoint - The first code point to accept
  * @param lastCodePoint  - The last code point to accept (inclusive)
  */
-export function range(firstCodePoint: number, lastCodePoint: number): Parser<string> {
-	return (input: string, offset: number) => {
-		const cp = input.codePointAt(offset);
-		if (cp !== undefined && cp >= firstCodePoint && cp <= lastCodePoint) {
-			const char = String.fromCodePoint(cp);
-			return okWithValue(offset + char.length, char);
-		}
-		return error(offset, [
+export function range(
+	firstCodePoint: number,
+	lastCodePoint: number,
+	expected?: string[]
+): Parser<void> {
+	return codepoint(
+		(cp) => firstCodePoint <= cp && cp <= lastCodePoint,
+		expected || [
 			`${String.fromCodePoint(firstCodePoint)}-${String.fromCodePoint(lastCodePoint)}`,
-		]);
-	};
+		]
+	);
 }
 
 /**
@@ -114,7 +142,7 @@ export function skipChars(nCodepoints: number): Parser<void> {
 			if (cp === undefined) {
 				return error(offset, ['any character']);
 			}
-			offset += String.fromCodePoint(cp).length;
+			offset += lengthFromCodePoint(cp);
 			i -= 1;
 		}
 		return ok(offset);
@@ -188,9 +216,10 @@ export function filter<T>(
  *
  * @public
  *
- * @param parsers - Parsers to attempt to apply
+ * @param parsers  - Parsers to attempt to apply
+ * @param expected - Overrides the expected value used if none of the inner parsers match
  */
-export function or<T>(parsers: Parser<T>[]): Parser<T> {
+export function or<T>(parsers: Parser<T>[], expected?: string[]): Parser<T> {
 	return (input, offset) => {
 		let lastError: ParseResult<T> | null = null;
 		for (const parser of parsers) {
@@ -201,14 +230,18 @@ export function or<T>(parsers: Parser<T>[]): Parser<T> {
 
 			if (lastError === null || res.offset > lastError.offset) {
 				lastError = res;
-			} else if (res.offset === lastError.offset) {
+			} else if (res.offset === lastError.offset && expected === undefined) {
 				lastError.expected = lastError.expected.concat(res.expected);
 			}
 			if (res.fatal) {
 				break;
 			}
 		}
-		return lastError || error(offset, []);
+		expected = expected || lastError?.expected || [];
+		if (lastError) {
+			lastError.expected = expected;
+		}
+		return lastError || error(offset, expected);
 	};
 }
 
@@ -265,6 +298,39 @@ export function star<T>(parser: Parser<T>): Parser<T[]> {
 		}
 
 		return okWithValue(nextOffset, ts);
+	};
+}
+
+/**
+ * Creates a Parser that tries to apply the given parser zero or more times in sequence. Values for
+ * successful matches are discarded. Once the inner parser no longer matches, success is returned at
+ * the offset reached.
+ *
+ * If the inner parser returns a fatal failure, the error is returned as-is.
+ *
+ * @public
+ *
+ * @param parser - Parser to apply repeatedly
+ */
+export function starConsumed<T>(parser: Parser<T>): Parser<void> {
+	return (input, offset) => {
+		let nextOffset = offset;
+		while (true) {
+			const res = parser(input, nextOffset);
+			if (!res.success) {
+				if (res.fatal) {
+					return res;
+				}
+				break;
+			}
+			if (res.offset === nextOffset) {
+				// Did not advance
+				break;
+			}
+			nextOffset = res.offset;
+		}
+
+		return ok(nextOffset);
 	};
 }
 
@@ -361,6 +427,22 @@ export function second<T1, T2>(x: T1, y: T2): T2 {
 }
 
 /**
+ * Creates a Parser that tries to apply the given parser one or more times in sequence. Values for
+ * successful matches are discarded. Once the inner parser no longer matches, success is returned at
+ * the offset reached. The parser is required to match at least once, so an initial failure is
+ * returned as-is.
+ *
+ * If the inner parser returns a fatal failure, the error is returned as-is.
+ *
+ * @public
+ *
+ * @param parser - The parser to apply repeatedly
+ */
+export function plusConsumed<T>(parser: Parser<T>): Parser<void> {
+	return then(parser, starConsumed(parser), second);
+}
+
+/**
  * Creates a Parser that applies the given two parsers in sequence, returning the result of the
  * second if the first succeeds.
  *
@@ -420,6 +502,9 @@ export function delimited<TOpen, T, TClose>(
  * Creates a Parser that applies the given parser. If successful, the inner parser's value is
  * discarded and the substring that was consumed from the input is returned as value instead. Errors
  * are returned as-is.
+ *
+ * When using this in combination with `star` or `plus`, consider using `starConsumed` or
+ * `plusConsumed` instead for efficiency.
  *
  * @public
  *

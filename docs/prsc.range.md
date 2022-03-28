@@ -6,10 +6,12 @@
 
 Creates a Parser that matches a single character from a range of codepoints.
 
+Use `recognize` if you need the character that was matched.
+
 <b>Signature:</b>
 
 ```typescript
-export declare function range(firstCodePoint: number, lastCodePoint: number): Parser<string>;
+export declare function range(firstCodePoint: number, lastCodePoint: number, expected?: string[]): Parser<void>;
 ```
 
 ## Parameters
@@ -18,8 +20,9 @@ export declare function range(firstCodePoint: number, lastCodePoint: number): Pa
 |  --- | --- | --- |
 |  firstCodePoint | number | The first code point to accept |
 |  lastCodePoint | number | The last code point to accept (inclusive) |
+|  expected | string\[\] |  |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;string&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;void&gt;
 
