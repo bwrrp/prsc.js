@@ -107,7 +107,7 @@ describe('parser combinators', () => {
 			expect(res2.offset).toBe(3);
 		});
 
-		it('replaces the expected value for child errors only if the child fails at the same offset', () => {
+		it('retains the expected value for child errors if the inner parser fails', () => {
 			const parser = filter(
 				then(token('a'), token('b'), (a, b) => b + a),
 				() => true,
@@ -116,12 +116,20 @@ describe('parser combinators', () => {
 			const res1 = parser('bb', 0);
 			expect(res1.success).toBe(false);
 			expect(res1.offset).toBe(0);
-			expect((res1 as any).expected).toEqual(['expected']);
+			expect((res1 as any).expected).toEqual(['a']);
 
 			const res2 = parser('aa', 0);
 			expect(res2.success).toBe(false);
 			expect(res2.offset).toBe(1);
 			expect((res2 as any).expected).toEqual(['b']);
+		});
+
+		it('returns the given expected value if the filter rejects', () => {
+			const parser = filter(token('a'), (a) => false, ['expected']);
+			const res1 = parser('a', 0);
+			expect(res1.success).toBe(false);
+			expect(res1.offset).toBe(0);
+			expect((res1 as any).expected).toEqual(['expected']);
 		});
 	});
 

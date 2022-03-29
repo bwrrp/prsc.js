@@ -197,9 +197,6 @@ export function filter<T>(
 	return (input, offset) => {
 		const res = parser(input, offset);
 		if (!res.success) {
-			if (res.offset === offset) {
-				return error(offset, expected);
-			}
 			return res;
 		}
 		if (!filter(res.value)) {
