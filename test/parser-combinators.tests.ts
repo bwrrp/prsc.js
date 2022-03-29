@@ -20,6 +20,9 @@ import {
 	consume,
 	except,
 	filterUndefined,
+	followed,
+	starConsumed,
+	plusConsumed,
 } from '../src/parser-combinators';
 
 describe('parser combinators', () => {
@@ -157,9 +160,10 @@ describe('parser combinators', () => {
 		});
 
 		it('stops trying child parsers if one returns a fatal error', () => {
-			const parser = or([cut(token('a')), token('b')]);
+			const parser = or([followed(token('b'), token('c')), cut(token('a')), token('b')]);
 			const res = parser('b', 0);
 			expect(res.success).toBe(false);
+			// Fatal error takes priority over a non-fatal failed parser that made it further
 			expect(res.offset).toBe(0);
 			expect((res as any).fatal).toBe(true);
 			expect((res as any).expected).toEqual(['a']);
@@ -201,6 +205,36 @@ describe('parser combinators', () => {
 
 		it('returns failure for fatal errors', () => {
 			const parser = star(cut(token('a')));
+			const res = parser('aaab', 0);
+			expect(res.success).toBe(false);
+			expect(res.offset).toBe(3);
+			expect((res as any).expected).toEqual(['a']);
+		});
+	});
+
+	describe('starConsumed', () => {
+		it('consumes input by running the parser 0 or more times', () => {
+			const parser = starConsumed(token('a'));
+			expect(parser('b', 0).success).toBe(true);
+			expect(parser('b', 0).offset).toBe(0);
+			expect((parser('b', 0) as any).value).toBe(undefined);
+			expect(parser('a', 0).success).toBe(true);
+			expect(parser('a', 0).offset).toBe(1);
+			expect((parser('a', 0) as any).value).toBe(undefined);
+			expect(parser('aaa', 0).success).toBe(true);
+			expect(parser('aaa', 0).offset).toBe(3);
+			expect((parser('aaa', 0) as any).value).toBe(undefined);
+		});
+
+		it('does not end up in an infinite loop if the inner parser does not consume input', () => {
+			const parser = starConsumed(not(token('a'), ['not a']));
+			expect(parser('b', 0).success).toBe(true);
+			expect(parser('b', 0).offset).toBe(0);
+			expect((parser('b', 0) as any).value).toBe(undefined);
+		});
+
+		it('returns failure for fatal errors', () => {
+			const parser = starConsumed(cut(token('a')));
 			const res = parser('aaab', 0);
 			expect(res.success).toBe(false);
 			expect(res.offset).toBe(3);
@@ -250,6 +284,21 @@ describe('parser combinators', () => {
 			expect(parser('aaa', 0).success).toBe(true);
 			expect(parser('aaa', 0).offset).toBe(3);
 			expect((parser('aaa', 0) as any).value).toEqual(['a', 'a', 'a']);
+		});
+	});
+
+	describe('plusConsumed', () => {
+		it('consumes input by running the parser 1 or more times', () => {
+			const parser = plusConsumed(token('a'));
+			expect(parser('b', 0).success).toBe(false);
+			expect(parser('b', 0).offset).toBe(0);
+			expect((parser('b', 0) as any).expected).toEqual(['a']);
+			expect(parser('a', 0).success).toBe(true);
+			expect(parser('a', 0).offset).toBe(1);
+			expect((parser('a', 0) as any).value).toBe(undefined);
+			expect(parser('aaa', 0).success).toBe(true);
+			expect(parser('aaa', 0).offset).toBe(3);
+			expect((parser('aaa', 0) as any).value).toBe(undefined);
 		});
 	});
 

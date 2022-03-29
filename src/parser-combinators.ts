@@ -234,7 +234,7 @@ export function or<T>(parsers: Parser<T>[], expected?: string[]): Parser<T> {
 				lastError.expected = lastError.expected.concat(res.expected);
 			}
 			if (res.fatal) {
-				break;
+				return res;
 			}
 		}
 		expected = expected || lastError?.expected || [];
