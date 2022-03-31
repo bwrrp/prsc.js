@@ -85,9 +85,12 @@ function lengthFromCodePoint(cp: number): number {
  *
  * This counts in unicode characters (code points), not UTF-16 code units.
  *
+ * To match a sequence of code points, consider using `codepoints` instead.
+ *
  * @public
  *
- * @param isMatch - callback called with the next codepoint, should return whether that matches
+ * @param isMatch  - callback called with the next codepoint, should return whether that matches
+ * @param expected - expected strings to return if the codepoint does not match
  */
 export function codepoint(
 	isMatch: (codepoint: number) => boolean,
@@ -99,6 +102,43 @@ export function codepoint(
 			return error(offset, expected);
 		}
 		return ok(offset + lengthFromCodePoint(cp));
+	};
+}
+
+/**
+ * Creates a Parser that skips code points while the given predicate returns true.
+ *
+ * This counts in unicode characters (code points), not UTF-16 code units.
+ *
+ * This acts like `starConsumed(codepoint(isMatch, []))` if expected is not set, or as
+ * `plusConsumed(codepoint(isMatch, expected))` if it is, but is much more efficient than either of
+ * those combinations.
+ *
+ * @public
+ *
+ * @param isMatch  - callback called for each codepoint, should return whether that matches
+ * @param expected - expected strings to return if the first codepoint does not match
+ */
+export function codepoints(
+	isMatch: (codepoint: number) => boolean,
+	expected?: string[]
+): Parser<void> {
+	return (input: string, offset: number) => {
+		const startOffset = offset;
+		while (true) {
+			const cp = input.codePointAt(offset);
+			if (cp === undefined) {
+				break;
+			}
+			if (!isMatch(cp)) {
+				break;
+			}
+			offset += cp > 0xffff ? 2 : 1;
+		}
+		if (expected !== undefined && offset === startOffset) {
+			return error(offset, expected);
+		}
+		return ok(offset);
 	};
 }
 

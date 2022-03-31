@@ -23,6 +23,8 @@ import {
 	followed,
 	starConsumed,
 	plusConsumed,
+	codepoint,
+	codepoints,
 } from '../src/parser-combinators';
 
 describe('parser combinators', () => {
@@ -36,6 +38,48 @@ describe('parser combinators', () => {
 			expect(token('zaz')('zzazz', 0).offset).toBe(0);
 			expect(token('zaz')('zzazz', 7).success).toBe(false);
 			expect(token('zaz')('zzazz', 7).offset).toBe(7);
+		});
+	});
+
+	describe('codepoint', () => {
+		it('skips a codepoint if it matches', () => {
+			expect(codepoint(() => true, [])('a', 0).success).toBe(true);
+			expect(codepoint(() => true, [])('a', 0).offset).toBe(1);
+		});
+
+		it('returns expected if it does not', () => {
+			expect(codepoint(() => false, ['expected'])('a', 0).success).toBe(false);
+			expect(codepoint(() => false, ['expected'])('a', 0).offset).toBe(0);
+			expect((codepoint(() => false, ['expected'])('a', 0) as any).expected).toEqual([
+				'expected',
+			]);
+		});
+	});
+
+	describe('codepoints', () => {
+		it('skips codepoints while they match', () => {
+			const parser = codepoints((cp) => cp === 'a'.codePointAt(0));
+			expect(parser('a', 0).success).toBe(true);
+			expect(parser('a', 0).offset).toBe(1);
+			expect(parser('aaab', 0).success).toBe(true);
+			expect(parser('aaab', 0).offset).toBe(3);
+			expect(parser('b', 0).success).toBe(true);
+			expect(parser('b', 0).offset).toBe(0);
+		});
+
+		it('handles surrogate pairs', () => {
+			const parser = codepoints((cp) => cp > 0x10000);
+			expect(parser('\u{1f4a9}b', 0).success).toBe(true);
+			expect(parser('\u{1f4a9}b', 0).offset).toBe(2);
+		});
+
+		it('needs to match at least one if expected is provided', () => {
+			const parser = codepoints((cp) => cp === 'a'.codePointAt(0), ['expected']);
+			expect(parser('a', 0).success).toBe(true);
+			expect(parser('a', 0).offset).toBe(1);
+			expect(parser('b', 0).success).toBe(false);
+			expect(parser('b', 0).offset).toBe(0);
+			expect((parser('b', 0) as any).expected).toEqual(['expected']);
 		});
 	});
 

@@ -8,6 +8,8 @@ Creates a Parser that skips the next code point if the given predicate returns t
 
 This counts in unicode characters (code points), not UTF-16 code units.
 
+To match a sequence of code points, consider using `codepoints` instead.
+
 <b>Signature:</b>
 
 ```typescript
@@ -19,7 +21,7 @@ export declare function codepoint(isMatch: (codepoint: number) => boolean, expec
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  isMatch | (codepoint: number) =&gt; boolean | callback called with the next codepoint, should return whether that matches |
-|  expected | string\[\] |  |
+|  expected | string\[\] | expected strings to return if the codepoint does not match |
 
 <b>Returns:</b>
 

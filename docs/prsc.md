@@ -8,7 +8,8 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [codepoint(isMatch, expected)](./prsc.codepoint.md) | Creates a Parser that skips the next code point if the given predicate returns true.<!-- -->This counts in unicode characters (code points), not UTF-16 code units. |
+|  [codepoint(isMatch, expected)](./prsc.codepoint.md) | Creates a Parser that skips the next code point if the given predicate returns true.<!-- -->This counts in unicode characters (code points), not UTF-16 code units.<!-- -->To match a sequence of code points, consider using <code>codepoints</code> instead. |
+|  [codepoints(isMatch, expected)](./prsc.codepoints.md) | Creates a Parser that skips code points while the given predicate returns true.<!-- -->This counts in unicode characters (code points), not UTF-16 code units.<!-- -->This acts like <code>starConsumed(codepoint(isMatch, []))</code> if expected is not set, or as <code>plusConsumed(codepoint(isMatch, expected))</code> if it is, but is much more efficient than either of those combinations. |
 |  [collect(gen)](./prsc.collect.md) | Helper to collect both the yielded values and the returned value from a generator. |
 |  [complete(parser)](./prsc.complete.md) | Creates a Parser that applies the given parser and only succeeds (returning the inner parser's result) if parsing concludes at the end of the input string. |
 |  [consume(parser)](./prsc.consume.md) | Creates a Parser that applies the given parser but discards the resulting value. |

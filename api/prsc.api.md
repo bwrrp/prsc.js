@@ -8,6 +8,9 @@
 export function codepoint(isMatch: (codepoint: number) => boolean, expected: string[]): Parser<void>;
 
 // @public
+export function codepoints(isMatch: (codepoint: number) => boolean, expected?: string[]): Parser<void>;
+
+// @public
 export function collect<T, R>(gen: Generator<T, R>): [T[], R];
 
 // @public
