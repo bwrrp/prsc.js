@@ -20,7 +20,7 @@ export declare function range(firstCodePoint: number, lastCodePoint: number, exp
 |  --- | --- | --- |
 |  firstCodePoint | number | The first code point to accept |
 |  lastCodePoint | number | The last code point to accept (inclusive) |
-|  expected | string\[\] |  |
+|  expected | string\[\] | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

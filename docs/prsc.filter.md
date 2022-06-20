@@ -9,7 +9,7 @@ Creates a Parser that uses the given filter predicate to check values generated 
 <b>Signature:</b>
 
 ```typescript
-export declare function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, expected: string[]): Parser<T>;
+export declare function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, expected: string[], fatal?: boolean): Parser<T>;
 ```
 
 ## Parameters
@@ -19,6 +19,7 @@ export declare function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, 
 |  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser to filter |
 |  filter | (v: T) =&gt; boolean | Predicate function over the inner parser's values |
 |  expected | string\[\] | Expected values for parse errors generated when the filter rejects a value |
+|  fatal | boolean | <i>(Optional)</i> Whether the error returned when the filter rejects should be fatal |
 
 <b>Returns:</b>
 

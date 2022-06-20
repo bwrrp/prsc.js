@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.19.5",
-    "schemaVersion": 1004,
+    "toolVersion": "7.25.1",
+    "schemaVersion": 1006,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,7 +156,8 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
@@ -220,14 +221,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "codepoint"
@@ -283,14 +286,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "codepoints"
@@ -338,7 +343,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -415,7 +421,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -481,7 +488,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -547,7 +555,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -647,28 +656,32 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "inner",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "close",
               "parameterTypeTokenRange": {
                 "startIndex": 7,
                 "endIndex": 9
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "cutAfterOpen",
               "parameterTypeTokenRange": {
                 "startIndex": 10,
                 "endIndex": 11
-              }
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -727,6 +740,7 @@
               "text": "<void>"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "end",
           "variableTypeTokenRange": {
@@ -793,21 +807,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "fatal",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
-              }
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -894,21 +911,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "except",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 7,
                 "endIndex": 8
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -940,7 +960,7 @@
         {
           "kind": "Function",
           "canonicalReference": "prsc!filter:function(1)",
-          "docComment": "/**\n * Creates a Parser that uses the given filter predicate to check values generated by the given parser. Values that pass the predicate are passed through, those that don't return a parse error instead.\n *\n * @param parser - Parser to filter\n *\n * @param filter - Predicate function over the inner parser's values\n *\n * @param expected - Expected values for parse errors generated when the filter rejects a value\n *\n * @public\n */\n",
+          "docComment": "/**\n * Creates a Parser that uses the given filter predicate to check values generated by the given parser. Values that pass the predicate are passed through, those that don't return a parse error instead.\n *\n * @param parser - Parser to filter\n *\n * @param filter - Predicate function over the inner parser's values\n *\n * @param expected - Expected values for parse errors generated when the filter rejects a value\n *\n * @param fatal - Whether the error returned when the filter rejects should be fatal\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -973,6 +993,14 @@
             },
             {
               "kind": "Content",
+              "text": ", fatal?: "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
               "text": "): "
             },
             {
@@ -990,8 +1018,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 8,
-            "endIndex": 10
+            "startIndex": 10,
+            "endIndex": 12
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1001,21 +1029,32 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "filter",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "fatal",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -1081,7 +1120,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1145,14 +1185,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "y",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1242,14 +1284,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "after",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1334,14 +1378,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "map",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1426,14 +1472,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1494,7 +1542,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "ok"
@@ -1550,14 +1599,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "value",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1623,7 +1674,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1697,14 +1749,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
-              }
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -1855,7 +1909,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1921,7 +1976,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1987,7 +2043,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2066,14 +2123,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "parser",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2161,21 +2220,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "lastCodePoint",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "expected",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "range"
@@ -2228,7 +2290,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2292,14 +2355,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "y",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2371,7 +2436,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "skipChars"
@@ -2424,7 +2490,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2490,7 +2557,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2527,6 +2595,7 @@
               "text": "<void>"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "start",
           "variableTypeTokenRange": {
@@ -2582,7 +2651,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2648,7 +2718,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2714,7 +2785,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2780,7 +2852,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2902,7 +2975,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2981,14 +3055,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "parser2",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3086,21 +3162,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "parser2",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "join",
               "parameterTypeTokenRange": {
                 "startIndex": 7,
                 "endIndex": 8
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3183,7 +3262,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "token"

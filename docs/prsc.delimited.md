@@ -21,7 +21,7 @@ export declare function delimited<TOpen, T, TClose>(open: Parser<TOpen>, inner: 
 |  open | [Parser](./prsc.parser.md)<!-- -->&lt;TOpen&gt; | First parser to apply, value is discarded |
 |  inner | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Second parser to apply, value is kept |
 |  close | [Parser](./prsc.parser.md)<!-- -->&lt;TClose&gt; | Third parser to apply, value is discarded |
-|  cutAfterOpen | boolean | If <code>true</code>, errors returned by the second and third parsers are considered fatal, causing parsers using this to stop trying other branches. |
+|  cutAfterOpen | boolean | <i>(Optional)</i> If <code>true</code>, errors returned by the second and third parsers are considered fatal, causing parsers using this to stop trying other branches. |
 
 <b>Returns:</b>
 

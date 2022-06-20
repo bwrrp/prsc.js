@@ -174,6 +174,23 @@ describe('parser combinators', () => {
 			expect(res1.success).toBe(false);
 			expect(res1.offset).toBe(0);
 			expect((res1 as any).expected).toEqual(['expected']);
+			expect((res1 as any).fatal).toBe(false);
+		});
+
+		it('can create a fatal error if the filter rejects', () => {
+			const parser = filter(token('a'), (a) => false, ['expected'], true);
+			const res1 = parser('a', 0);
+			expect(res1.success).toBe(false);
+			expect(res1.offset).toBe(0);
+			expect((res1 as any).expected).toEqual(['expected']);
+			expect((res1 as any).fatal).toBe(true);
+
+			// Fatal flag is not applied if the inner parser rejects
+			const res2 = parser('b', 0);
+			expect(res2.success).toBe(false);
+			expect(res2.offset).toBe(0);
+			expect((res2 as any).expected).toEqual(['a']);
+			expect((res2 as any).fatal).toBe(false);
 		});
 	});
 

@@ -21,7 +21,7 @@ export declare function codepoints(isMatch: (codepoint: number) => boolean, expe
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  isMatch | (codepoint: number) =&gt; boolean | callback called for each codepoint, should return whether that matches |
-|  expected | string\[\] | expected strings to return if the first codepoint does not match |
+|  expected | string\[\] | <i>(Optional)</i> expected strings to return if the first codepoint does not match |
 
 <b>Returns:</b>
 

@@ -228,11 +228,13 @@ export function consume<T>(parser: Parser<T>): Parser<void> {
  * @param parser   - Parser to filter
  * @param filter   - Predicate function over the inner parser's values
  * @param expected - Expected values for parse errors generated when the filter rejects a value
+ * @param fatal    - Whether the error returned when the filter rejects should be fatal
  */
 export function filter<T>(
 	parser: Parser<T>,
 	filter: (v: T) => boolean,
-	expected: string[]
+	expected: string[],
+	fatal?: boolean
 ): Parser<T> {
 	return (input, offset) => {
 		const res = parser(input, offset);
@@ -240,7 +242,7 @@ export function filter<T>(
 			return res;
 		}
 		if (!filter(res.value)) {
-			return error(offset, expected);
+			return error(offset, expected, fatal);
 		}
 		return res;
 	};

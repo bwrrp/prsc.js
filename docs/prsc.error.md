@@ -18,7 +18,7 @@ export declare function error<T>(offset: number, expected: string[], fatal?: boo
 |  --- | --- | --- |
 |  offset | number | The offset in the input at which matching failed |
 |  expected | string\[\] | An array of strings indicating things that were expected at offset |
-|  fatal | boolean | If true, no other branches should be tried as a result of this error |
+|  fatal | boolean | <i>(Optional)</i> If true, no other branches should be tried as a result of this error |
 
 <b>Returns:</b>
 
