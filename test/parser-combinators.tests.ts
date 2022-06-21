@@ -1,30 +1,31 @@
 import {
-	filter,
-	map,
-	optional,
-	or,
-	plus,
-	star,
-	then,
-	token,
-	not,
-	recognize,
-	delimited,
-	cut,
-	preceded,
-	peek,
-	complete,
-	start,
-	range,
-	skipChars,
-	consume,
-	except,
-	filterUndefined,
-	followed,
-	starConsumed,
-	plusConsumed,
 	codepoint,
 	codepoints,
+	complete,
+	consume,
+	cut,
+	delimited,
+	dispatch,
+	except,
+	filter,
+	filterUndefined,
+	followed,
+	map,
+	not,
+	optional,
+	or,
+	peek,
+	plus,
+	plusConsumed,
+	preceded,
+	range,
+	recognize,
+	skipChars,
+	star,
+	starConsumed,
+	start,
+	then,
+	token,
 } from '../src/parser-combinators';
 
 describe('parser combinators', () => {
@@ -405,6 +406,55 @@ describe('parser combinators', () => {
 			const parser = except(token('b'), token('a'), ['b not a']);
 			expect(parser('b', 0).success).toBe(true);
 			expect(parser('b', 0).offset).toBe(1);
+		});
+	});
+
+	describe('dispatch', () => {
+		it('can choose a child parser based on the next codepoint', () => {
+			const parser = dispatch(
+				{
+					['a'.codePointAt(0)!]: token('-a-'),
+					['b'.codePointAt(0)!]: token('/b/'),
+				},
+				token('(c)'),
+				1
+			);
+			expect(parser('-a-', 0).success).toBe(true);
+			expect(parser('-a-', 0).offset).toBe(3);
+			expect(parser('/b/', 0).success).toBe(true);
+			expect(parser('/b/', 0).offset).toBe(3);
+			expect(parser('(c)', 0).success).toBe(true);
+			expect(parser('(c)', 0).offset).toBe(3);
+		});
+
+		it('propagates the error from the selected child parser', () => {
+			const parser = dispatch(
+				{
+					['a'.codePointAt(0)!]: token('a.'),
+					['b'.codePointAt(0)!]: token('b.'),
+				},
+				token('(c)')
+			);
+			expect(parser('a)', 0).success).toBe(false);
+			expect(parser('a)', 0).offset).toBe(0);
+			expect((parser('a)', 0) as any).expected).toEqual(['a.']);
+		});
+
+		it('uses the expected value', () => {
+			const parser = dispatch(
+				{
+					['a'.codePointAt(0)!]: token('a'),
+				},
+				undefined,
+				0,
+				['expected']
+			);
+			expect(parser('', 0).success).toBe(false);
+			expect(parser('', 0).offset).toBe(0);
+			expect((parser('', 0) as any).expected).toEqual(['expected']);
+			expect(parser('b', 0).success).toBe(false);
+			expect(parser('b', 0).offset).toBe(0);
+			expect((parser('b', 0) as any).expected).toEqual(['expected']);
 		});
 	});
 

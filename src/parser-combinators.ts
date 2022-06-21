@@ -613,6 +613,44 @@ export function except<T, U>(match: Parser<T>, except: Parser<U>, expected: stri
 }
 
 /**
+ * Creates a parser that looks at a single codepoint to determine which parser to invoke. Can be
+ * used as an alternative to large `or` parsers if looking ahead can narrow down the options.
+ *
+ * Can optionally look ahead further than the current codepoint, which is useful when nesting
+ * several `dispatch` parsers.
+ *
+ * @public
+ *
+ * @param mapping     - Object mapping code points to parsers
+ * @param otherwise   - Parser to use when the code point is not found in the mapping, or undefined
+ *                      to reject in that situation.
+ * @param extraOffset - How far ahead to look for the codepoint, defaults to 0
+ * @param expected    - Expected values for parse errors generated when there is no codepoint or
+ *                      when the codepoint is not in the mapping and there is no `otherwise` parser
+ */
+export function dispatch<T>(
+	mapping: { [codepoint: number]: Parser<T> },
+	otherwise: Parser<T> | undefined,
+	extraOffset: number = 0,
+	expected: string[] = []
+): Parser<T> {
+	return (input, offset) => {
+		const cp = input.codePointAt(offset + extraOffset);
+		if (cp === undefined) {
+			return error(offset, expected);
+		}
+		const parser = mapping[cp];
+		if (parser === undefined) {
+			if (otherwise === undefined) {
+				return error(offset, expected);
+			}
+			return otherwise(input, offset);
+		}
+		return parser(input, offset);
+	};
+}
+
+/**
  * Creates a Parser that turns errors returned by the inner parser into fatal errors. Parsers such
  * as `or` and `star` will not continue to attempt additional matches if a parser returns a fatal
  * error, and will usually return the error instead.

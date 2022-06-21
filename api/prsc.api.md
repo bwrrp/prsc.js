@@ -26,6 +26,11 @@ export function cut<T>(parser: Parser<T>): Parser<T>;
 export function delimited<TOpen, T, TClose>(open: Parser<TOpen>, inner: Parser<T>, close: Parser<TClose>, cutAfterOpen?: boolean): Parser<T>;
 
 // @public
+export function dispatch<T>(mapping: {
+    [codepoint: number]: Parser<T>;
+}, otherwise: Parser<T> | undefined, extraOffset?: number, expected?: string[]): Parser<T>;
+
+// @public
 export const end: Parser<void>;
 
 // @public
