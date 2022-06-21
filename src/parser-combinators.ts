@@ -424,6 +424,56 @@ export function then<T1, T2, T>(
 }
 
 /**
+ * Creates a parser that applies the given parsers in sequence, returning a tuple of the
+ * corresponding values if all of them accept.
+ *
+ * This can be slightly less efficient than nesting `then` and its variations, but may be a lot more
+ * readable. If you don't care about any of the values produced, consider using `sequenceConsumed`
+ * instead.
+ *
+ * @public
+ *
+ * @param parsers - Parsers to apply one after the other
+ */
+export function sequence<Ts extends unknown[]>(
+	...parsers: { [key in keyof Ts]: Parser<Ts[key]> }
+): Parser<Ts> {
+	return (input, offset) => {
+		const values: Ts = [] as unknown[] as Ts;
+		for (const parser of parsers) {
+			const res = parser(input, offset);
+			if (!res.success) {
+				return res;
+			}
+			offset = res.offset;
+			values.push(res.value);
+		}
+		return okWithValue(offset, values);
+	};
+}
+
+/**
+ * Creates a parser that applies the given parsers in sequence, discarding all of the values
+ * produced.
+ *
+ * @public
+ *
+ * @param parsers - Parsers to apply one after the other
+ */
+export function sequenceConsumed(...parsers: Parser<unknown>[]): Parser<void> {
+	return (input, offset) => {
+		for (const parser of parsers) {
+			const res = parser(input, offset);
+			if (!res.success) {
+				return res;
+			}
+			offset = res.offset;
+		}
+		return ok(offset);
+	};
+}
+
+/**
  * Creates a Parser that tries to apply the given parser one or more times in sequence. Values for
  * successful matches are collected in an array. Once the inner parser no longer matches, success is
  * returned at the offset reached with the accumulated values. The parser is required to match at

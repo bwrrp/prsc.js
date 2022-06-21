@@ -20,6 +20,8 @@ import {
 	preceded,
 	range,
 	recognize,
+	sequence,
+	sequenceConsumed,
 	skipChars,
 	star,
 	starConsumed,
@@ -339,6 +341,42 @@ describe('parser combinators', () => {
 			expect(parser('ab', 0).success).toBe(true);
 			expect(parser('ab', 0).offset).toBe(2);
 			expect((parser('ab', 0) as any).value).toBe('ba');
+		});
+	});
+
+	describe('sequence', () => {
+		it('runs a number of parsers in sequence and returns the values as a tuple', () => {
+			const parser = sequence(token('a'), token('b'), token('c'));
+			expect(parser('a', 0).success).toBe(false);
+			expect(parser('a', 0).offset).toBe(1);
+			expect((parser('a', 0) as any).expected).toEqual(['b']);
+			expect(parser('aa', 0).success).toBe(false);
+			expect(parser('aa', 0).offset).toBe(1);
+			expect((parser('aa', 0) as any).expected).toEqual(['b']);
+			expect(parser('abb', 0).success).toBe(false);
+			expect(parser('abb', 0).offset).toBe(2);
+			expect((parser('abb', 0) as any).expected).toEqual(['c']);
+			expect(parser('abc', 0).success).toBe(true);
+			expect(parser('abc', 0).offset).toBe(3);
+			expect((parser('abc', 0) as any).value).toEqual(['a', 'b', 'c']);
+		});
+	});
+
+	describe('sequenceConsumed', () => {
+		it('runs a number of parsers in sequence and returns nothing', () => {
+			const parser = sequenceConsumed(token('a'), token('b'), token('c'));
+			expect(parser('a', 0).success).toBe(false);
+			expect(parser('a', 0).offset).toBe(1);
+			expect((parser('a', 0) as any).expected).toEqual(['b']);
+			expect(parser('aa', 0).success).toBe(false);
+			expect(parser('aa', 0).offset).toBe(1);
+			expect((parser('aa', 0) as any).expected).toEqual(['b']);
+			expect(parser('abb', 0).success).toBe(false);
+			expect(parser('abb', 0).offset).toBe(2);
+			expect((parser('abb', 0) as any).expected).toEqual(['c']);
+			expect(parser('abc', 0).success).toBe(true);
+			expect(parser('abc', 0).offset).toBe(3);
+			expect((parser('abc', 0) as any).value).toBe(undefined);
 		});
 	});
 

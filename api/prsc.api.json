@@ -2519,6 +2519,139 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "prsc!sequence:function(1)",
+          "docComment": "/**\n * Creates a parser that applies the given parsers in sequence, returning a tuple of the corresponding values if all of them accept.\n *\n * This can be slightly less efficient than nesting `then` and its variations, but may be a lot more readable. If you don't care about any of the values produced, consider using `sequenceConsumed` instead.\n *\n * @param parsers - Parsers to apply one after the other\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function sequence<Ts extends "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown[]"
+            },
+            {
+              "kind": "Content",
+              "text": ">(...parsers: "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    [key in keyof Ts]: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<Ts[key]>;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<Ts>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 7,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parsers",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              },
+              "isOptional": false
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "Ts",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "sequence"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "prsc!sequenceConsumed:function(1)",
+          "docComment": "/**\n * Creates a parser that applies the given parsers in sequence, discarding all of the values produced.\n *\n * @param parsers - Parsers to apply one after the other\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function sequenceConsumed(...parsers: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Parser",
+              "canonicalReference": "prsc!Parser:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 4,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "parsers",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "sequenceConsumed"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "prsc!skipChars:function(1)",
           "docComment": "/**\n * Creates a Parser that skips the given number of characters.\n *\n * This counts in unicode characters (code points), not UTF-16 code units.\n *\n * @param nCodepoints - number of characters to skip\n *\n * @public\n */\n",
           "excerptTokens": [

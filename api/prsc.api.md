@@ -106,6 +106,14 @@ export function recognize<T>(parser: Parser<T>): Parser<string>;
 export function second<T1, T2>(x: T1, y: T2): T2;
 
 // @public
+export function sequence<Ts extends unknown[]>(...parsers: {
+    [key in keyof Ts]: Parser<Ts[key]>;
+}): Parser<Ts>;
+
+// @public
+export function sequenceConsumed(...parsers: Parser<unknown>[]): Parser<void>;
+
+// @public
 export function skipChars(nCodepoints: number): Parser<void>;
 
 // @public
