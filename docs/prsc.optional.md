@@ -11,16 +11,16 @@ If the inner parser returns a fatal failure, the error is returned as-is.
 <b>Signature:</b>
 
 ```typescript
-export declare function optional<T>(parser: Parser<T>): Parser<T | null>;
+export declare function optional<T, Input = string>(parser: Parser<T, Input>): Parser<T | null, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser to attempt to apply |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | Parser to attempt to apply |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T \| null&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T \| null, Input&gt;
 

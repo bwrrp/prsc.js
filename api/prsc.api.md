@@ -11,51 +11,66 @@ export function codepoint(isMatch: (codepoint: number) => boolean, expected: str
 export function codepoints(isMatch: (codepoint: number) => boolean, expected?: string[]): Parser<void>;
 
 // @public
+export function codepointsUtf8(isMatch: (codepoint: number) => boolean, expected?: string[]): Parser<void, ArrayLike<number>>;
+
+// @public
+export function codepointUtf8(isMatch: (codepoint: number) => boolean, expected: string[]): Parser<void, ArrayLike<number>>;
+
+// @public
 export function collect<T, R>(gen: Generator<T, R>): [T[], R];
 
 // @public
-export function complete<T>(parser: Parser<T>): Parser<T>;
+export function complete<T, Input extends {
+    length: number;
+} = string>(parser: Parser<T, Input>): Parser<T, Input>;
 
 // @public
-export function consume<T>(parser: Parser<T>): Parser<void>;
+export function consume<T, Input = string>(parser: Parser<T, Input>): Parser<void, Input>;
 
 // @public
-export function cut<T>(parser: Parser<T>): Parser<T>;
+export function cut<T, Input = string>(parser: Parser<T, Input>): Parser<T, Input>;
 
 // @public
-export function delimited<TOpen, T, TClose>(open: Parser<TOpen>, inner: Parser<T>, close: Parser<TClose>, cutAfterOpen?: boolean): Parser<T>;
+export function delimited<TOpen, T, TClose, Input = string>(open: Parser<TOpen, Input>, inner: Parser<T, Input>, close: Parser<TClose, Input>, cutAfterOpen?: boolean): Parser<T, Input>;
 
 // @public
 export function dispatch<T>(mapping: {
-    [codepoint: number]: Parser<T>;
-}, otherwise: Parser<T> | undefined, extraOffset?: number, expected?: string[]): Parser<T>;
+    [codepoint: number]: Parser<T, string>;
+}, otherwise: Parser<T, string> | undefined, extraOffset?: number, expected?: string[]): Parser<T, string>;
 
 // @public
-export const end: Parser<void>;
+export function dispatchUtf8<T>(mapping: {
+    [codepoint: number]: Parser<T, ArrayLike<number>>;
+}, otherwise: Parser<T, ArrayLike<number>> | undefined, extraOffset?: number, expected?: string[]): Parser<T, ArrayLike<number>>;
+
+// @public
+export const end: Parser<void, {
+    length: number;
+}>;
 
 // @public
 export function error<T>(offset: number, expected: string[], fatal?: boolean): ParseResult<T>;
 
 // @public
-export function except<T, U>(match: Parser<T>, except: Parser<U>, expected: string[]): Parser<T>;
+export function except<T, U, Input = string>(match: Parser<T, Input>, except: Parser<U, Input>, expected: string[]): Parser<T, Input>;
 
 // @public
-export function filter<T>(parser: Parser<T>, filter: (v: T) => boolean, expected: string[], fatal?: boolean): Parser<T>;
+export function filter<T, Input = string>(parser: Parser<T, Input>, filter: (v: T) => boolean, expected: string[], fatal?: boolean): Parser<T, Input>;
 
 // @public
-export function filterUndefined<T>(parser: Parser<(T | void)[]>): Parser<T[]>;
+export function filterUndefined<T, Input = string>(parser: Parser<(T | void)[], Input>): Parser<T[], Input>;
 
 // @public
 export function first<T1, T2>(x: T1, y: T2): T1;
 
 // @public
-export function followed<T, TAfter>(parser: Parser<T>, after: Parser<TAfter>): Parser<T>;
+export function followed<T, TAfter, Input = string>(parser: Parser<T, Input>, after: Parser<TAfter, Input>): Parser<T, Input>;
 
 // @public
-export function map<T, U>(parser: Parser<T>, map: (v: T) => U): Parser<U>;
+export function map<T, U, Input = string>(parser: Parser<T, Input>, map: (v: T) => U): Parser<U, Input>;
 
 // @public
-export function not<T>(parser: Parser<T>, expected: string[]): Parser<void>;
+export function not<T, Input = string>(parser: Parser<T, Input>, expected: string[]): Parser<void, Input>;
 
 // @public
 export function ok(offset: number): ParseResult<undefined>;
@@ -64,13 +79,13 @@ export function ok(offset: number): ParseResult<undefined>;
 export function okWithValue<T>(offset: number, value: T): ParseResult<T>;
 
 // @public
-export function optional<T>(parser: Parser<T>): Parser<T | null>;
+export function optional<T, Input = string>(parser: Parser<T, Input>): Parser<T | null, Input>;
 
 // @public
-export function or<T>(parsers: Parser<T>[], expected?: string[]): Parser<T>;
+export function or<T, Input = string>(parsers: Parser<T, Input>[], expected?: string[]): Parser<T, Input>;
 
 // @public
-export type Parser<T> = (input: string, offset: number) => ParseResult<T>;
+export type Parser<T, Input = string> = (input: Input, offset: number) => ParseResult<T>;
 
 // @public
 export type ParseResult<T> = {
@@ -85,45 +100,54 @@ export type ParseResult<T> = {
 };
 
 // @public
-export function peek<T>(parser: Parser<T>): Parser<T>;
+export function peek<T, Input = string>(parser: Parser<T, Input>): Parser<T, Input>;
 
 // @public
-export function plus<T>(parser: Parser<T>): Parser<T[]>;
+export function plus<T, Input = string>(parser: Parser<T, Input>): Parser<T[], Input>;
 
 // @public
-export function plusConsumed<T>(parser: Parser<T>): Parser<void>;
+export function plusConsumed<T, Input = string>(parser: Parser<T, Input>): Parser<void, Input>;
 
 // @public
-export function preceded<TBefore, T>(before: Parser<TBefore>, parser: Parser<T>): Parser<T>;
+export function preceded<TBefore, T, Input = string>(before: Parser<TBefore, Input>, parser: Parser<T, Input>): Parser<T, Input>;
 
 // @public
 export function range(firstCodePoint: number, lastCodePoint: number, expected?: string[]): Parser<void>;
 
 // @public
-export function recognize<T>(parser: Parser<T>): Parser<string>;
+export function rangeUtf8(firstCodePoint: number, lastCodePoint: number, expected?: string[]): Parser<void, ArrayLike<number>>;
+
+// @public
+export function recognize<T>(parser: Parser<T>): Parser<string, string>;
+
+// @public
+export function recognizeUtf8<T>(parser: Parser<T, ArrayLike<number>>): Parser<string, ArrayLike<number>>;
 
 // @public
 export function second<T1, T2>(x: T1, y: T2): T2;
 
 // @public
-export function sequence<Ts extends unknown[]>(...parsers: {
-    [key in keyof Ts]: Parser<Ts[key]>;
-}): Parser<Ts>;
+export function sequence<Ts extends unknown[], Input = string>(...parsers: {
+    [key in keyof Ts]: Parser<Ts[key], Input>;
+}): Parser<Ts, Input>;
 
 // @public
-export function sequenceConsumed(...parsers: Parser<unknown>[]): Parser<void>;
+export function sequenceConsumed<Input = string>(...parsers: Parser<unknown, Input>[]): Parser<void, Input>;
 
 // @public
 export function skipChars(nCodepoints: number): Parser<void>;
 
 // @public
-export function star<T>(parser: Parser<T>): Parser<T[]>;
+export function skipCharsUtf8(nCodepoints: number): Parser<void, ArrayLike<number>>;
 
 // @public
-export function starConsumed<T>(parser: Parser<T>): Parser<void>;
+export function star<T, Input = string>(parser: Parser<T, Input>): Parser<T[], Input>;
 
 // @public
-export const start: Parser<void>;
+export function starConsumed<T, Input = string>(parser: Parser<T, Input>): Parser<void, Input>;
+
+// @public
+export const start: Parser<void, unknown>;
 
 // @public
 export function streaming<T>(parser: Parser<T>): StreamingParser<T>;
@@ -147,10 +171,13 @@ export function streamingStar<T>(parser: StreamingParser<T>): StreamingParser<T>
 export function streamingThen<T, U>(parser1: StreamingParser<T>, parser2: StreamingParser<U>): StreamingParser<T | U>;
 
 // @public
-export function then<T1, T2, T>(parser1: Parser<T1>, parser2: Parser<T2>, join: (value1: T1, value2: T2) => T): Parser<T>;
+export function then<T1, T2, T, Input = string>(parser1: Parser<T1, Input>, parser2: Parser<T2, Input>, join: (value1: T1, value2: T2) => T): Parser<T, Input>;
 
 // @public
-export function token(token: string): Parser<string>;
+export function token(token: string): Parser<string, string>;
+
+// @public
+export function tokenUtf8(token: string): Parser<string, ArrayLike<number>>;
 
 // (No @packageDocumentation comment for this package)
 

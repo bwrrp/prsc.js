@@ -11,16 +11,16 @@ Errors returned by the inner parser are returned as-is.
 <b>Signature:</b>
 
 ```typescript
-export declare function peek<T>(parser: Parser<T>): Parser<T>;
+export declare function peek<T, Input = string>(parser: Parser<T, Input>): Parser<T, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to apply, value is discarded and any progress made in input is reset. |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | The parser to apply, value is discarded and any progress made in input is reset. |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt;
 

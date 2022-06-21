@@ -11,19 +11,19 @@ Optionally makes errors by the second and third parsers fatal if `cutAfterOpen` 
 <b>Signature:</b>
 
 ```typescript
-export declare function delimited<TOpen, T, TClose>(open: Parser<TOpen>, inner: Parser<T>, close: Parser<TClose>, cutAfterOpen?: boolean): Parser<T>;
+export declare function delimited<TOpen, T, TClose, Input = string>(open: Parser<TOpen, Input>, inner: Parser<T, Input>, close: Parser<TClose, Input>, cutAfterOpen?: boolean): Parser<T, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  open | [Parser](./prsc.parser.md)<!-- -->&lt;TOpen&gt; | First parser to apply, value is discarded |
-|  inner | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Second parser to apply, value is kept |
-|  close | [Parser](./prsc.parser.md)<!-- -->&lt;TClose&gt; | Third parser to apply, value is discarded |
+|  open | [Parser](./prsc.parser.md)<!-- -->&lt;TOpen, Input&gt; | First parser to apply, value is discarded |
+|  inner | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | Second parser to apply, value is kept |
+|  close | [Parser](./prsc.parser.md)<!-- -->&lt;TClose, Input&gt; | Third parser to apply, value is discarded |
 |  cutAfterOpen | boolean | <i>(Optional)</i> If <code>true</code>, errors returned by the second and third parsers are considered fatal, causing parsers using this to stop trying other branches. |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt;
 

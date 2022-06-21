@@ -9,5 +9,5 @@ A parser that only succeeds at the start of the input string.
 <b>Signature:</b>
 
 ```typescript
-start: Parser<void>
+start: Parser<void, unknown>
 ```

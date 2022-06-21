@@ -9,17 +9,17 @@ Creates a Parser that succeeds at the starting offset if the given parser fails 
 <b>Signature:</b>
 
 ```typescript
-export declare function not<T>(parser: Parser<T>, expected: string[]): Parser<void>;
+export declare function not<T, Input = string>(parser: Parser<T, Input>, expected: string[]): Parser<void, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to apply |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | The parser to apply |
 |  expected | string\[\] | Expected values for parse errors generated when the inner parser succeeds |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;void&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;void, Input&gt;
 

@@ -9,16 +9,16 @@ Creates a Parser that applies the given parser but discards the resulting value.
 <b>Signature:</b>
 
 ```typescript
-export declare function consume<T>(parser: Parser<T>): Parser<void>;
+export declare function consume<T, Input = string>(parser: Parser<T, Input>): Parser<void, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser to apply |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | Parser to apply |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;void&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;void, Input&gt;
 

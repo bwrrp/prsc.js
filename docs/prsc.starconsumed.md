@@ -11,16 +11,16 @@ If the inner parser returns a fatal failure, the error is returned as-is.
 <b>Signature:</b>
 
 ```typescript
-export declare function starConsumed<T>(parser: Parser<T>): Parser<void>;
+export declare function starConsumed<T, Input = string>(parser: Parser<T, Input>): Parser<void, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser to apply repeatedly |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | Parser to apply repeatedly |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;void&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;void, Input&gt;
 

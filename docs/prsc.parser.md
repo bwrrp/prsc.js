@@ -9,7 +9,7 @@ A parser is a function that tries to match whatever it expects at the given offs
 <b>Signature:</b>
 
 ```typescript
-export declare type Parser<T> = (input: string, offset: number) => ParseResult<T>;
+export declare type Parser<T, Input = string> = (input: Input, offset: number) => ParseResult<T>;
 ```
 <b>References:</b> [ParseResult](./prsc.parseresult.md)
 

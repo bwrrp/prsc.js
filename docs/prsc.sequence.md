@@ -11,18 +11,18 @@ This can be slightly less efficient than nesting `then` and its variations, but 
 <b>Signature:</b>
 
 ```typescript
-export declare function sequence<Ts extends unknown[]>(...parsers: {
-    [key in keyof Ts]: Parser<Ts[key]>;
-}): Parser<Ts>;
+export declare function sequence<Ts extends unknown[], Input = string>(...parsers: {
+    [key in keyof Ts]: Parser<Ts[key], Input>;
+}): Parser<Ts, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parsers | { \[key in keyof Ts\]: [Parser](./prsc.parser.md)<!-- -->&lt;Ts\[key\]&gt;; } | Parsers to apply one after the other |
+|  parsers | { \[key in keyof Ts\]: [Parser](./prsc.parser.md)<!-- -->&lt;Ts\[key\], Input&gt;; } | Parsers to apply one after the other |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;Ts&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;Ts, Input&gt;
 

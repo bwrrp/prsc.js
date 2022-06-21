@@ -9,18 +9,18 @@ Creates a Parser that matches only if the first Parser matches input at the star
 <b>Signature:</b>
 
 ```typescript
-export declare function except<T, U>(match: Parser<T>, except: Parser<U>, expected: string[]): Parser<T>;
+export declare function except<T, U, Input = string>(match: Parser<T, Input>, except: Parser<U, Input>, expected: string[]): Parser<T, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  match | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Parser that should match |
-|  except | [Parser](./prsc.parser.md)<!-- -->&lt;U&gt; | Parser that should not match |
+|  match | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | Parser that should match |
+|  except | [Parser](./prsc.parser.md)<!-- -->&lt;U, Input&gt; | Parser that should not match |
 |  expected | string\[\] | Expected values for parse errors generated when the except parser succeeds |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt;
 

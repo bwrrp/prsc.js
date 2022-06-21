@@ -9,5 +9,7 @@ A parser that only succeeds if the end of the input string is reached.
 <b>Signature:</b>
 
 ```typescript
-end: Parser<void>
+end: Parser<void, {
+    length: number;
+}>
 ```

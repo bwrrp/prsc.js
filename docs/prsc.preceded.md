@@ -11,17 +11,17 @@ Equivalent to `then(before, parser, second)`<!-- -->.
 <b>Signature:</b>
 
 ```typescript
-export declare function preceded<TBefore, T>(before: Parser<TBefore>, parser: Parser<T>): Parser<T>;
+export declare function preceded<TBefore, T, Input = string>(before: Parser<TBefore, Input>, parser: Parser<T, Input>): Parser<T, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  before | [Parser](./prsc.parser.md)<!-- -->&lt;TBefore&gt; | First parser to apply, value is discarded |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | Second parser to apply, value is kept |
+|  before | [Parser](./prsc.parser.md)<!-- -->&lt;TBefore, Input&gt; | First parser to apply, value is discarded |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | Second parser to apply, value is kept |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt;
 

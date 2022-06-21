@@ -11,16 +11,16 @@ If the inner parser returns a fatal failure, the error is returned as-is.
 <b>Signature:</b>
 
 ```typescript
-export declare function plus<T>(parser: Parser<T>): Parser<T[]>;
+export declare function plus<T, Input = string>(parser: Parser<T, Input>): Parser<T[], Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to apply repeatedly |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | The parser to apply repeatedly |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T\[\]&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T\[\], Input&gt;
 

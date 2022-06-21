@@ -9,16 +9,16 @@ Creates a parser that applies the given parsers in sequence, discarding all of t
 <b>Signature:</b>
 
 ```typescript
-export declare function sequenceConsumed(...parsers: Parser<unknown>[]): Parser<void>;
+export declare function sequenceConsumed<Input = string>(...parsers: Parser<unknown, Input>[]): Parser<void, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parsers | [Parser](./prsc.parser.md)<!-- -->&lt;unknown&gt;\[\] | Parsers to apply one after the other |
+|  parsers | [Parser](./prsc.parser.md)<!-- -->&lt;unknown, Input&gt;\[\] | Parsers to apply one after the other |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;void&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;void, Input&gt;
 

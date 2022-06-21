@@ -18,16 +18,16 @@ const as: Parser<string[]> = filterUndefined(abs);
 <b>Signature:</b>
 
 ```typescript
-export declare function filterUndefined<T>(parser: Parser<(T | void)[]>): Parser<T[]>;
+export declare function filterUndefined<T, Input = string>(parser: Parser<(T | void)[], Input>): Parser<T[], Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;(T \| void)\[\]&gt; | Parser to apply, should produce an array that may contain undefined entries. |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;(T \| void)\[\], Input&gt; | Parser to apply, should produce an array that may contain undefined entries. |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T\[\]&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T\[\], Input&gt;
 

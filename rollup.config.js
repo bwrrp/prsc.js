@@ -15,5 +15,5 @@ export default {
 		},
 		{ file: MODULE_DEST_FILE, format: 'es', sourcemap: true },
 	],
-	plugins: [sourcemaps(), terser()],
+	plugins: [sourcemaps()],
 };

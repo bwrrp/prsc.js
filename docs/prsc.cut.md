@@ -9,16 +9,16 @@ Creates a Parser that turns errors returned by the inner parser into fatal error
 <b>Signature:</b>
 
 ```typescript
-export declare function cut<T>(parser: Parser<T>): Parser<T>;
+export declare function cut<T, Input = string>(parser: Parser<T, Input>): Parser<T, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to wrap |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | The parser to wrap |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt;
 

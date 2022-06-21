@@ -9,18 +9,18 @@ Creates a Parser that applies the given two parsers in sequence, returning succe
 <b>Signature:</b>
 
 ```typescript
-export declare function then<T1, T2, T>(parser1: Parser<T1>, parser2: Parser<T2>, join: (value1: T1, value2: T2) => T): Parser<T>;
+export declare function then<T1, T2, T, Input = string>(parser1: Parser<T1, Input>, parser2: Parser<T2, Input>, join: (value1: T1, value2: T2) => T): Parser<T, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser1 | [Parser](./prsc.parser.md)<!-- -->&lt;T1&gt; | First parser to apply |
-|  parser2 | [Parser](./prsc.parser.md)<!-- -->&lt;T2&gt; | Parser to apply after the first one is successful |
+|  parser1 | [Parser](./prsc.parser.md)<!-- -->&lt;T1, Input&gt; | First parser to apply |
+|  parser2 | [Parser](./prsc.parser.md)<!-- -->&lt;T2, Input&gt; | Parser to apply after the first one is successful |
 |  join | (value1: T1, value2: T2) =&gt; T | Function used to combine the values of both parsers |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt;
 

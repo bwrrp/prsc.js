@@ -9,16 +9,18 @@ Creates a Parser that applies the given parser and only succeeds (returning the 
 <b>Signature:</b>
 
 ```typescript
-export declare function complete<T>(parser: Parser<T>): Parser<T>;
+export declare function complete<T, Input extends {
+    length: number;
+} = string>(parser: Parser<T, Input>): Parser<T, Input>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T&gt; | The parser to wrap |
+|  parser | [Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt; | The parser to wrap |
 
 <b>Returns:</b>
 
-[Parser](./prsc.parser.md)<!-- -->&lt;T&gt;
+[Parser](./prsc.parser.md)<!-- -->&lt;T, Input&gt;
 
