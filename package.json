@@ -8,12 +8,13 @@
 		"parser",
 		"combinators"
 	],
-	"main": "dist/prsc.umd.js",
-	"module": "dist/prsc.esm.js",
+	"main": "./dist/prsc.umd.cjs",
+	"module": "./dist/prsc.esm.js",
+	"type": "module",
 	"exports": {
 		".": {
-			"require": "./dist/prsc.umd.js",
 			"import": "./dist/prsc.esm.js",
+			"require": "./dist/prsc.umd.cjs",
 			"default": "./dist/prsc.esm.js"
 		}
 	},
